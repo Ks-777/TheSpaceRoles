@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "TheSpaceRoles": {
+      "commandName": "Project"
+    },
+    "TSR run": {
+      "commandName": "Executable",
+      "executablePath": "$(AmongUs)\\Among Us.exe"
+    }
+  }
+}
