@@ -11,16 +11,16 @@
       "RelativeMoniker": "D:0:0:{2D421A41-D6FD-4047-9F66-27932F660CEE}|TheSpaceRoles.csproj|solutionrelative:plugin\\keycommands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D421A41-D6FD-4047-9F66-27932F660CEE}|TheSpaceRoles.csproj|c:\\users\\taiti\\documents\\github\\thespaceroles\\plugin\\roles\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D421A41-D6FD-4047-9F66-27932F660CEE}|TheSpaceRoles.csproj|solutionrelative:plugin\\roles\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D421A41-D6FD-4047-9F66-27932F660CEE}|TheSpaceRoles.csproj|c:\\users\\taiti\\documents\\github\\thespaceroles\\plugin\\alldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D421A41-D6FD-4047-9F66-27932F660CEE}|TheSpaceRoles.csproj|solutionrelative:plugin\\alldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2D421A41-D6FD-4047-9F66-27932F660CEE}|TheSpaceRoles.csproj|c:\\users\\taiti\\documents\\github\\thespaceroles\\plugin\\rpc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2D421A41-D6FD-4047-9F66-27932F660CEE}|TheSpaceRoles.csproj|solutionrelative:plugin\\rpc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2D421A41-D6FD-4047-9F66-27932F660CEE}|TheSpaceRoles.csproj|c:\\users\\taiti\\documents\\github\\thespaceroles\\plugin\\alldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2D421A41-D6FD-4047-9F66-27932F660CEE}|TheSpaceRoles.csproj|solutionrelative:plugin\\alldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2D421A41-D6FD-4047-9F66-27932F660CEE}|TheSpaceRoles.csproj|c:\\users\\taiti\\documents\\github\\thespaceroles\\plugin\\roles\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2D421A41-D6FD-4047-9F66-27932F660CEE}|TheSpaceRoles.csproj|solutionrelative:plugin\\roles\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2D421A41-D6FD-4047-9F66-27932F660CEE}|TheSpaceRoles.csproj|c:\\users\\taiti\\documents\\github\\thespaceroles\\thespaceroles.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
@@ -38,13 +38,13 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "AllData.cs",
               "DocumentMoniker": "C:\\Users\\taiti\\Documents\\GitHub\\TheSpaceRoles\\Plugin\\AllData.cs",
               "RelativeDocumentMoniker": "Plugin\\AllData.cs",
               "ToolTip": "C:\\Users\\taiti\\Documents\\GitHub\\TheSpaceRoles\\Plugin\\AllData.cs",
               "RelativeToolTip": "Plugin\\AllData.cs",
-              "ViewState": "AQIAADUAAAAAAAAAAAAYwFEAAAAyAAAA",
+              "ViewState": "AQIAACwAAAAAAAAAAAAYwFEAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-02T04:57:01.876Z",
               "IsPinned": true,
@@ -91,7 +91,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Roles.cs",
               "DocumentMoniker": "C:\\Users\\taiti\\Documents\\GitHub\\TheSpaceRoles\\Plugin\\Roles\\Roles.cs",
               "RelativeDocumentMoniker": "Plugin\\Roles\\Roles.cs",
@@ -99,21 +99,19 @@
               "RelativeToolTip": "Plugin\\Roles\\Roles.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAA/AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-02T04:56:54.597Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T04:56:54.597Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "TheSpaceRoles",
+              "Title": "TheSpaceRoles.csproj",
               "DocumentMoniker": "C:\\Users\\taiti\\Documents\\GitHub\\TheSpaceRoles\\TheSpaceRoles.csproj",
               "RelativeDocumentMoniker": "TheSpaceRoles.csproj",
               "ToolTip": "C:\\Users\\taiti\\Documents\\GitHub\\TheSpaceRoles\\TheSpaceRoles.csproj",
               "RelativeToolTip": "TheSpaceRoles.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-03-02T04:55:21.37Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T04:55:21.37Z"
             }
           ]
         }
