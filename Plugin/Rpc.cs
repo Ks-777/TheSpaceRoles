@@ -12,13 +12,6 @@ namespace TheSpaceRoles
     [HarmonyPatch]
     public static class Rpc
     {
-        public enum Rpcs:byte{
-            SetRole=80,
-            ChangeRole,
-            GameEnd,
-            SendSetting,
-            UseAbility,
-        }
 
 
 
@@ -34,9 +27,19 @@ namespace TheSpaceRoles
                 switch(callId) 
                 {
                     case (byte)Rpcs.SetRole:
+                        int playerId = reader.ReadInt32();
+                        int roleId = reader.ReadInt32();
+                        RolesAssets.SetRole(playerId, roleId);
                         break;
                 }
             }
         }
+        public static MessageWriter SendRpc(Rpcs rpc)
+        {
+
+            MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId, (byte)rpc, SendOption.Reliable);
+            return writer;
+        }
+        
     }
 }

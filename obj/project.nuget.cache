@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "q4kqHx8SyY1/YJlBwqGBj7GVvDIlG3G1YofMPxveqO8h096Ukodj7FKKXJo9AjpzKbPBBtUrwl4UcBBaxpnEEA==",
+  "dgSpecHash": "qcE8Ld5MT5SV6x0kFJPLw+MryX0hqcX2Obh6OWm5G9RAaGmYBfYTNiFXGYJt4y2rl/AHfPPuYWrjS3MvYbaF6Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\taiti\\Desktop\\AmongUsMods\\TheSpaceRoles\\TheSpaceRoles.csproj",
+  "projectFilePath": "C:\\Users\\taiti\\Documents\\GitHub\\TheSpaceRoles\\TheSpaceRoles.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\taiti\\.nuget\\packages\\amongus.gamelibs.steam\\2023.11.28\\amongus.gamelibs.steam.2023.11.28.nupkg.sha512",
     "C:\\Users\\taiti\\.nuget\\packages\\asmresolver\\5.1.0\\asmresolver.5.1.0.nupkg.sha512",

@@ -13,9 +13,9 @@ using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("TheSpaceRoles")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
-[assembly: System.Reflection.AssemblyDescriptionAttribute("My first plugin")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("Many Funny Roles!")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d5ed08d5b7adb38c1e661ebf41d698b669a8bc8")]
 [assembly: System.Reflection.AssemblyProductAttribute("TheSpaceRoles")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TheSpaceRoles")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

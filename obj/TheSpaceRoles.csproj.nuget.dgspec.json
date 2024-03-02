@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\taiti\\Desktop\\AmongUsMods\\TheSpaceRoles\\TheSpaceRoles.csproj": {}
+    "C:\\Users\\taiti\\Documents\\GitHub\\TheSpaceRoles\\TheSpaceRoles.csproj": {}
   },
   "projects": {
-    "C:\\Users\\taiti\\Desktop\\AmongUsMods\\TheSpaceRoles\\TheSpaceRoles.csproj": {
+    "C:\\Users\\taiti\\Documents\\GitHub\\TheSpaceRoles\\TheSpaceRoles.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\taiti\\Desktop\\AmongUsMods\\TheSpaceRoles\\TheSpaceRoles.csproj",
+        "projectUniqueName": "C:\\Users\\taiti\\Documents\\GitHub\\TheSpaceRoles\\TheSpaceRoles.csproj",
         "projectName": "TheSpaceRoles",
-        "projectPath": "C:\\Users\\taiti\\Desktop\\AmongUsMods\\TheSpaceRoles\\TheSpaceRoles.csproj",
+        "projectPath": "C:\\Users\\taiti\\Documents\\GitHub\\TheSpaceRoles\\TheSpaceRoles.csproj",
         "packagesPath": "C:\\Users\\taiti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\taiti\\Desktop\\AmongUsMods\\TheSpaceRoles\\obj\\",
+        "outputPath": "C:\\Users\\taiti\\Documents\\GitHub\\TheSpaceRoles\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -91,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.406\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
