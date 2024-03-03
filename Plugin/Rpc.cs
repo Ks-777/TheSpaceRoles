@@ -27,9 +27,10 @@ namespace TheSpaceRoles
                 switch(callId) 
                 {
                     case (byte)Rpcs.SetRole:
-                        int playerId = reader.ReadInt32();
-                        int roleId = reader.ReadInt32();
-                        RolesAssets.SetRole(playerId, roleId);
+                        GameStarter.SetRole(reader.ReadInt32(), reader.ReadInt32());
+                        break;
+                    case (byte)Rpcs.SetTeam:
+                        GameStarter.SetTeam(reader.ReadInt32(), reader.ReadInt32());
                         break;
                 }
             }
@@ -41,5 +42,15 @@ namespace TheSpaceRoles
             return writer;
         }
         
+    }
+
+    public enum Rpcs : int
+    {
+        SetRole = 80,
+        SetTeam,
+        ChangeRole,
+        GameEnd,
+        SendSetting,
+        UseAbility,
     }
 }
