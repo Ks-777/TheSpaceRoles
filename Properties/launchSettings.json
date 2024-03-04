@@ -6,6 +6,10 @@
     "TSR run": {
       "commandName": "Executable",
       "executablePath": "$(AmongUs)\\Among Us.exe"
+    },
+    "TSR4 run": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\taiti\\Desktop\\AmongUsMods\\startBat\\start4.bat"
     }
   }
 }

@@ -1,11 +1,5 @@
 ﻿using HarmonyLib;
 using Hazel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheSpaceRoles
 {
@@ -15,22 +9,27 @@ namespace TheSpaceRoles
 
 
 
-        [HarmonyPatch(typeof(PlayerControl),nameof(PlayerControl.HandleRpc))]
+        [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.HandleRpc))]
         public static class Hud
         {
-            public static void Prefix(PlayerControl __instance) 
+            public static void Prefix(global::PlayerControl __instance)
             {
 
             }
             public static void Postfix(byte callId, MessageReader reader)
             {
-                switch(callId) 
+
+                switch (callId)
                 {
                     case (byte)Rpcs.SetRole:
-                        GameStarter.SetRole(reader.ReadInt32(), reader.ReadInt32());
+                        int r1 = reader.ReadInt32();
+                        int r2 = reader.ReadInt32();
+                        GameStarter.SetRole(r1, r2);
                         break;
                     case (byte)Rpcs.SetTeam:
-                        GameStarter.SetTeam(reader.ReadInt32(), reader.ReadInt32());
+                        int t1 = reader.ReadInt32();
+                        int t2 = reader.ReadInt32();
+                        GameStarter.SetTeam(t1, t2);
                         break;
                 }
             }
@@ -38,10 +37,10 @@ namespace TheSpaceRoles
         public static MessageWriter SendRpc(Rpcs rpc)
         {
 
-            MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId, (byte)rpc, SendOption.Reliable);
+            MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(global::PlayerControl.LocalPlayer.NetId, (byte)rpc, SendOption.Reliable);
             return writer;
         }
-        
+
     }
 
     public enum Rpcs : int

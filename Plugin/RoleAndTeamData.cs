@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using Color = UnityEngine.Color;
 
 namespace TheSpaceRoles
 {
@@ -70,16 +65,6 @@ namespace TheSpaceRoles
         Prosecutor,//検察官?
         Pursuer,//追跡者?
         Thief//泥棒?
-    }
-    public static class RoleLink
-    {
-        
-
-        public static Dictionary<Roles, RoleMaster> RoleLinks = new()
-        {
-            {Roles.Sheriff,new Sheriff()}
-            
-        };
     }
 
 }

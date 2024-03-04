@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HarmonyLib;
 using UnityEngine;
-using HarmonyLib;
 
 namespace TheSpaceRoles.Plugin
 {
-    [HarmonyPatch(typeof(PlayerControl),nameof(PlayerControl.FixedUpdate))]
+    [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
     public class KeyCommands
     {
-        public static void Postfix(PlayerControl __instance)
+        public static void Postfix(global::PlayerControl __instance)
         {
-            if (__instance?.Collider?.offset != null) {
+            if (__instance?.Collider?.offset != null)
+            {
 
                 if (Input.GetKey(KeyCode.LeftControl))
                 {

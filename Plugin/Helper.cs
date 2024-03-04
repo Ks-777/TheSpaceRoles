@@ -1,15 +1,10 @@
-﻿using LibCpp2IL.Elf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace TheSpaceRoles
 {
-    public static class Helper{
-        public static UnityEngine.Color ColorFromColorcode (string colorcode)
+    public static class Helper
+    {
+        public static UnityEngine.Color ColorFromColorcode(string colorcode)
         {
 
             if (ColorUtility.TryParseHtmlString(colorcode, out Color color))
@@ -24,14 +19,19 @@ namespace TheSpaceRoles
         }
         public static UnityEngine.Color ColorFromColorcode(int colorcode)
         {
-            ColorUtility.TryParseHtmlString("#"+colorcode.ToString(), out Color color);
+            ColorUtility.TryParseHtmlString("#" + colorcode.ToString(), out Color color);
             return color;
         }
-        public static int Random(int a ,int b)
+        public static string ColoredText(Color color,string text) 
+        {
+            return "<color=#" + ColorUtility.ToHtmlStringRGB(color) +">"+text;
+        }
+
+        public static int Random(int a, int b)
         {
 
             System.Random r = new System.Random();
-            return r.Next(a, b+1);
+            return r.Next(a, b + 1);
         }
     }
 }
