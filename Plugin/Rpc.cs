@@ -12,7 +12,7 @@ namespace TheSpaceRoles
         [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.HandleRpc))]
         public static class Hud
         {
-            public static void Prefix(global::PlayerControl __instance)
+            public static void Prefix(PlayerControl __instance)
             {
 
             }
@@ -48,6 +48,7 @@ namespace TheSpaceRoles
         SetRole = 80,
         SetTeam,
         ChangeRole,
+        GameStart,
         GameEnd,
         SendSetting,
         UseAbility,

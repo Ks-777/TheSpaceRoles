@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.Purchasing;
 using static TheSpaceRoles.Helper;
 
 namespace TheSpaceRoles
@@ -69,7 +68,7 @@ namespace TheSpaceRoles
         }
         public static void SendRpcSetTeam(Dictionary<Teams, int> teams)
         {
-            List<byte> ImpIds = DataBase.AllPlayerControls().Where(x => x.Data.Role.TeamType != RoleTeamTypes.Impostor).Select(x => x.PlayerId).ToList();
+            List<byte> ImpIds = DataBase.AllPlayerControls().Where(x => x.Data.Role.TeamType == RoleTeamTypes.Impostor).Select(x => x.PlayerId).ToList();
             List<byte> CrewIds = DataBase.AllPlayerControls().Where(x => x.Data.Role.TeamType != RoleTeamTypes.Impostor).Select(x => x.PlayerId).ToList();
 
 
@@ -95,9 +94,9 @@ namespace TheSpaceRoles
                 }
                 else if (teams1 == Teams.Impostor)
                 {
-                    if(ImpIds.Count > v) 
+                    if (ImpIds.Count > v)
                     {
-                        for (int i = 0; i < v- ImpIds.Count; i++)
+                        for (int i = 0; i < v - ImpIds.Count; i++)
                         {
 
                             int r = Random(0, ImpIds.Count - 1);
@@ -113,7 +112,7 @@ namespace TheSpaceRoles
                     }
                     else
                     {
-                        for (int i = 0; i < ImpIds.Count-v; i++)
+                        for (int i = 0; i < ImpIds.Count - v; i++)
                         {
 
                             int r = Random(0, ImpIds.Count - 1);
@@ -152,6 +151,11 @@ namespace TheSpaceRoles
             //var p = PlayerControl.AllPlayerControls.ToArray().First(x => x.PlayerId == playerId).PlayerId;
             DataBase.AllPlayerTeams.Add(playerId, (Teams)teamId);
             Logger.Info($"Player:{DataBase.AllPlayerControls().First(x => x.PlayerId == playerId).cosmetics.nameText.text}({playerId}) -> Team:{(Teams)teamId}");
+        }
+
+        public static void GameStartAndPrepare()
+        {
+            //RoleMaster_GameStart.GameStart();
         }
     }
 

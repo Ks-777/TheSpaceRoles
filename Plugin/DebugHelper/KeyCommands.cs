@@ -6,7 +6,7 @@ namespace TheSpaceRoles.Plugin
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
     public class KeyCommands
     {
-        public static void Postfix(global::PlayerControl __instance)
+        public static void Postfix(PlayerControl __instance)
         {
             if (__instance?.Collider?.offset != null)
             {
@@ -18,7 +18,7 @@ namespace TheSpaceRoles.Plugin
                 }
                 else
                 {
-                    __instance.Collider.offset = new Vector2(0, 0f);
+                    __instance.Collider.offset = new Vector2(0, -0.3636f);
                 }
             }
 

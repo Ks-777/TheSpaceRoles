@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using InnerNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,13 +33,22 @@ namespace TheSpaceRoles
         }
 
     }
-
-    [HarmonyPatch(typeof(GameStartManager), nameof(GameStartManager.BeginGame))]
-    public static class GameStart
+    [HarmonyPatch(typeof(HudManager), nameof(HudManager.Start))]
+    public static class RoleMaster_GameStart
     {
+
         public static void Prefix()
         {
 
+
+            if (AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Started)
+            {
+                if (DataBase.AllPlayerRoles.First(x => x.Key == PlayerControl.LocalPlayer.PlayerId).Value.Any(x => x.HasKillButton))
+                {
+                    
+                }
+
+            }
 
 
         }
