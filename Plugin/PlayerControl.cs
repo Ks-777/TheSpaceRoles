@@ -1,11 +1,7 @@
 ﻿using AmongUs.GameOptions;
-using Epic.OnlineServices.Sessions;
 using HarmonyLib;
 using System;
 using System.Linq;
-using TMPro;
-using UnityEngine;
-using static Il2CppSystem.Globalization.CultureInfo;
 
 namespace TheSpaceRoles
 {
@@ -15,7 +11,7 @@ namespace TheSpaceRoles
     {
         public static void Prefix(GameManager __instance)
         {
-            if (AmongUsClient.Instance.AmHost) PlayerControl.AllPlayerControls.ToArray().Do(x=>x.RpcSetRole(RoleTypes.Crewmate));
+            if (AmongUsClient.Instance.AmHost) PlayerControl.AllPlayerControls.ToArray().Do(x => x.RpcSetRole(RoleTypes.Crewmate));
 
             foreach ((int i, RoleMaster[] rolemaster) in DataBase.AllPlayerRoles)
             {
@@ -23,7 +19,7 @@ namespace TheSpaceRoles
                 var t = DataBase.AllPlayerControls().First(x => x.PlayerId == i).cosmetics.nameText.text;
                 Array.Sort(rolemaster);
 
-                DataBase.AllPlayerControls().First(x => x.PlayerId == i).cosmetics.nameText.text = t + $"\n <size=80%>{string.Join("×", rolemaster.Select(x=>x.ColoredRoleName()))}";
+                DataBase.AllPlayerControls().First(x => x.PlayerId == i).cosmetics.nameText.text = t + $"\n <size=80%>{string.Join("×", rolemaster.Select(x => x.ColoredRoleName()))}";
             }
             PlayerControl p = PlayerControl.LocalPlayer.GetComponent<PlayerControl>();
             p.RpcSetRole(RoleTypes.Impostor);
@@ -32,12 +28,12 @@ namespace TheSpaceRoles
 
         }
     }
-    [HarmonyPatch(typeof(PlayerControl),nameof(PlayerControl.FixedUpdate))]
+    [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
     public static class PlayerControlUpdatePatch
     {
-        public static void Prefix(PlayerControl __instance) 
+        public static void Prefix(PlayerControl __instance)
         {
-            
+
         }
     }
 }

@@ -27,10 +27,11 @@ namespace TheSpaceRoles
             AddtionalText.transform.localScale = Vector3.one;
         }
     }
-    [HarmonyPatch(typeof(PingTracker),nameof(PingTracker.Update))]
-    public static class ShowTSR{
+    [HarmonyPatch(typeof(PingTracker), nameof(PingTracker.Update))]
+    public static class ShowTSR
+    {
 
-        public static void Postfix(PingTracker __instance) 
+        public static void Postfix(PingTracker __instance)
         {
             __instance.text.text = __instance.text.text + $"\n<color=#5ccbff> {TSR.s_name} v{TSR.version}";
         }

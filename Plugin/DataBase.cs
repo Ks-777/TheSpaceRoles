@@ -17,7 +17,7 @@ namespace TheSpaceRoles
 
         public static PlayerControl[] AllPlayerControls()
         {
-            return PlayerControl.AllPlayerControls.ToArray().Where(x=>!x.isDummy).ToArray();
+            return PlayerControl.AllPlayerControls.ToArray().Where(x => !x.isDummy).ToArray();
         }
     }
 

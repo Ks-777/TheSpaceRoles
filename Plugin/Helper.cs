@@ -22,9 +22,9 @@ namespace TheSpaceRoles
             ColorUtility.TryParseHtmlString("#" + colorcode.ToString(), out Color color);
             return color;
         }
-        public static string ColoredText(Color color,string text) 
+        public static string ColoredText(Color color, string text)
         {
-            return "<color=#" + ColorUtility.ToHtmlStringRGB(color) +">"+text;
+            return "<color=#" + ColorUtility.ToHtmlStringRGB(color) + ">" + text;
         }
 
         public static int Random(int a, int b)
