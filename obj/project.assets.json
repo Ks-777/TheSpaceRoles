@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "AmongUs.GameLibs.Steam/2023.11.28": {
+      "AmongUs.GameLibs.Steam/2024.3.5": {
         "type": "package",
         "build": {
           "build/AmongUs.GameLibs.Steam.props": {}
@@ -1420,13 +1420,13 @@
     }
   },
   "libraries": {
-    "AmongUs.GameLibs.Steam/2023.11.28": {
-      "sha512": "EsKrZS4tjTRrY7mtZls3tMy54zije4vleEA9s0UGUr4SF3qm2axR6wMncyIJCk4ACXlN5Bxpsd3/upDe9Gnx6A==",
+    "AmongUs.GameLibs.Steam/2024.3.5": {
+      "sha512": "5KOcBSFnql0DmrL82GikWb5I+KLvD8h8RsS28BKTCws2fPKwWauUm/L9Zh73pIHcnOMCpvnAxWeZh/AqxAEI0Q==",
       "type": "package",
-      "path": "amongus.gamelibs.steam/2023.11.28",
+      "path": "amongus.gamelibs.steam/2024.3.5",
       "files": [
         ".nupkg.metadata",
-        "amongus.gamelibs.steam.2023.11.28.nupkg.sha512",
+        "amongus.gamelibs.steam.2024.3.5.nupkg.sha512",
         "amongus.gamelibs.steam.nuspec",
         "build/AddressablesPlayAssetDelivery.dll",
         "build/AmongUs.GameLibs.Steam.props",
@@ -1466,7 +1466,6 @@
         "build/Unity.Analytics.DataPrivacy.dll",
         "build/Unity.ProBuilder.dll",
         "build/Unity.ResourceManager.dll",
-        "build/Unity.Services.Analytics.dll",
         "build/Unity.Services.Core.Configuration.dll",
         "build/Unity.Services.Core.Device.dll",
         "build/Unity.Services.Core.Environments.Internal.dll",
@@ -4708,7 +4707,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "AmongUs.GameLibs.Steam >= 2023.11.28",
+      "AmongUs.GameLibs.Steam >= 2024.3.5",
       "BepInEx.IL2CPP.MSBuild >= 2.1.0-rc.1",
       "BepInEx.PluginInfoProps >= 2.*",
       "BepInEx.Unity.IL2CPP >= 6.0.0-be.*",
@@ -4770,7 +4769,7 @@
         "dependencies": {
           "AmongUs.GameLibs.Steam": {
             "target": "Package",
-            "version": "[2023.11.28, )"
+            "version": "[2024.3.5, )"
           },
           "BepInEx.IL2CPP.MSBuild": {
             "target": "Package",

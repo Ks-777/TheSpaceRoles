@@ -24,7 +24,7 @@ namespace TheSpaceRoles
         public bool CanUseBinoculars = true;
         public bool CanRepairSabotage = true;
         public bool HasTask = true;
-        public abstract void Start();
+        public abstract void HudManagerStart(HudManager hudManager);
         public virtual void Killed() { }
         public virtual void WasKilled() { }
         public string ColoredRoleName()
@@ -33,22 +33,25 @@ namespace TheSpaceRoles
         }
 
     }
-    [HarmonyPatch(typeof(HudManager), nameof(HudManager.Start))]
+    [HarmonyPatch(typeof(HudManager), nameof(HudManager.OnGameStart))]
     public static class RoleMaster_GameStart
     {
 
-        public static void Prefix()
+        public static void Postfix(HudManager __instance)
         {
 
 
-            if (AmongUsClient.Instance.GameState == InnerNetClient.GameStates.Started)
+            
+                Logger.Info("hudmanager start");
+            if(DataBase.AllPlayerRoles.Any(x => x.Key == PlayerControl.LocalPlayer.PlayerId))
             {
-                if (DataBase.AllPlayerRoles.First(x => x.Key == PlayerControl.LocalPlayer.PlayerId).Value.Any(x => x.HasKillButton))
-                {
-                    
-                }
+                Logger.Info(DataBase.AllPlayerRoles.First(x => x.Key == PlayerControl.LocalPlayer.PlayerId).Value.Select(x=>x.Role).ToString());
 
+                DataBase.AllPlayerRoles.First(x => x.Key == PlayerControl.LocalPlayer.PlayerId).Value.Do(x => x.HudManagerStart(__instance));
             }
+                
+
+            
 
 
         }

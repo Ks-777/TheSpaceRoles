@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "TheSpaceRoles/1.0.0": {
         "dependencies": {
-          "AmongUs.GameLibs.Steam": "2023.11.28",
+          "AmongUs.GameLibs.Steam": "2024.3.5",
           "BepInEx.IL2CPP.MSBuild": "2.1.0-rc.1",
           "BepInEx.PluginInfoProps": "2.1.0",
           "BepInEx.Unity.IL2CPP": "6.0.0-be.688",
@@ -18,7 +18,7 @@
           "TheSpaceRoles.dll": {}
         }
       },
-      "AmongUs.GameLibs.Steam/2023.11.28": {},
+      "AmongUs.GameLibs.Steam/2024.3.5": {},
       "AsmResolver/5.1.0": {},
       "AsmResolver.DotNet/5.1.0": {
         "dependencies": {
@@ -630,12 +630,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "AmongUs.GameLibs.Steam/2023.11.28": {
+    "AmongUs.GameLibs.Steam/2024.3.5": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-EsKrZS4tjTRrY7mtZls3tMy54zije4vleEA9s0UGUr4SF3qm2axR6wMncyIJCk4ACXlN5Bxpsd3/upDe9Gnx6A==",
-      "path": "amongus.gamelibs.steam/2023.11.28",
-      "hashPath": "amongus.gamelibs.steam.2023.11.28.nupkg.sha512"
+      "sha512": "sha512-5KOcBSFnql0DmrL82GikWb5I+KLvD8h8RsS28BKTCws2fPKwWauUm/L9Zh73pIHcnOMCpvnAxWeZh/AqxAEI0Q==",
+      "path": "amongus.gamelibs.steam/2024.3.5",
+      "hashPath": "amongus.gamelibs.steam.2024.3.5.nupkg.sha512"
     },
     "AsmResolver/5.1.0": {
       "type": "package",

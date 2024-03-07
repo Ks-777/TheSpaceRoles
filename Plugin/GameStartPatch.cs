@@ -6,10 +6,10 @@ using static TheSpaceRoles.Helper;
 
 namespace TheSpaceRoles
 {
-    [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.StartGame))]
+    [HarmonyPatch(typeof(RoleManager), nameof(RoleManager.SelectRoles))]
     public static class GameStarter
     {
-        public static void Prefix()
+        public static void Postfix()
         {
             //Resetするべ
             DataBase.AllPlayerTeams.Clear();
@@ -68,61 +68,50 @@ namespace TheSpaceRoles
         }
         public static void SendRpcSetTeam(Dictionary<Teams, int> teams)
         {
-            List<byte> ImpIds = DataBase.AllPlayerControls().Where(x => x.Data.Role.TeamType == RoleTeamTypes.Impostor).Select(x => x.PlayerId).ToList();
-            List<byte> CrewIds = DataBase.AllPlayerControls().Where(x => x.Data.Role.TeamType != RoleTeamTypes.Impostor).Select(x => x.PlayerId).ToList();
+            List<byte> ImpIds = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Data.Role.TeamType == RoleTeamTypes.Impostor).Select(x => x.PlayerId).ToList();
+            List<byte> CrewIds = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Data.Role.TeamType != RoleTeamTypes.Impostor).Select(x => x.PlayerId).ToList();
+            Logger.Info(string.Join("\n",PlayerControl.AllPlayerControls.ToArray().Select(x=>x.Data.Role.TeamType).ToArray() ));
+            Logger.Info($"imp:{ImpIds.Count}  c:{CrewIds.Count}");
 
-
-            foreach ((Teams teams1, int v) in teams)
+            foreach ((Teams teams1, int count) in teams)
             {
 
 
-                if (teams1 != Teams.Crewmate || teams1 != Teams.Impostor)
+                if (teams1 != Teams.Crewmate && teams1 != Teams.Impostor)
                 {
-                    for (int i = 0; i < v; i++)
+                    for (int i = 0; i < count; i++)
                     {
 
                         int r = Random(0, CrewIds.Count - 1);
 
                         SetTeam(CrewIds[r], (int)teams1);
-
-                        var writer = Rpc.SendRpc(Rpcs.SetTeam);
-                        writer.Write(r);
-                        writer.Write((int)teams1);
-                        AmongUsClient.Instance.FinishRpcImmediately(writer);
                         CrewIds.RemoveAt(r);
                     }
                 }
                 else if (teams1 == Teams.Impostor)
                 {
-                    if (ImpIds.Count > v)
+                    if (ImpIds.Count > count)
                     {
-                        for (int i = 0; i < v - ImpIds.Count; i++)
+                        for (int i = 0; i < count - ImpIds.Count; i++)
                         {
 
                             int r = Random(0, ImpIds.Count - 1);
 
                             SetTeam(ImpIds[r], (int)teams1);
 
-                            var writer = Rpc.SendRpc(Rpcs.SetTeam);
-                            writer.Write(r);
-                            writer.Write((int)Teams.Crewmate);
-                            AmongUsClient.Instance.FinishRpcImmediately(writer);
                             ImpIds.RemoveAt(r);
                         }
                     }
-                    else
-                    {
-                        for (int i = 0; i < ImpIds.Count - v; i++)
+                    else if
+                     (ImpIds.Count < count) { 
+
+                        for (int i = 0; i < ImpIds.Count - count; i++)
                         {
 
                             int r = Random(0, ImpIds.Count - 1);
 
                             SetTeam(CrewIds[r], (int)teams1);
 
-                            var writer = Rpc.SendRpc(Rpcs.SetTeam);
-                            writer.Write(r);
-                            writer.Write((int)Teams.Impostor);
-                            AmongUsClient.Instance.FinishRpcImmediately(writer);
                             ImpIds.RemoveAt(r);
                         }
                     }
@@ -133,12 +122,21 @@ namespace TheSpaceRoles
             {
                 SetTeam(pId, (int)Teams.Crewmate);
 
-                var writer = Rpc.SendRpc(Rpcs.SetTeam);
-                writer.Write(pId);
-                writer.Write((int)Teams.Crewmate);
-                AmongUsClient.Instance.FinishRpcImmediately(writer);
             }
+            foreach (var pId in ImpIds)
+            {
+                SetTeam(pId, (int)Teams.Impostor);
 
+            }
+            foreach (var database in DataBase.AllPlayerTeams)           
+            {
+
+                var writer = Rpc.SendRpc(Rpcs.SetTeam);
+                writer.Write(database.Key);
+                writer.Write((int)database.Value);
+                AmongUsClient.Instance.FinishRpcImmediately(writer);
+
+            }
 
         }
         public static void SetTeam(int playerId, int teamId)
@@ -149,8 +147,9 @@ namespace TheSpaceRoles
             //ここにどのroleIdがどのロールに対応するかを判定して
 
             //var p = PlayerControl.AllPlayerControls.ToArray().First(x => x.PlayerId == playerId).PlayerId;
-            DataBase.AllPlayerTeams.Add(playerId, (Teams)teamId);
             Logger.Info($"Player:{DataBase.AllPlayerControls().First(x => x.PlayerId == playerId).cosmetics.nameText.text}({playerId}) -> Team:{(Teams)teamId}");
+
+            DataBase.AllPlayerTeams.Add(playerId, (Teams)teamId);
         }
 
         public static void GameStartAndPrepare()

@@ -55,7 +55,7 @@
           "dependencies": {
             "AmongUs.GameLibs.Steam": {
               "target": "Package",
-              "version": "[2023.11.28, )"
+              "version": "[2024.3.5, )"
             },
             "BepInEx.IL2CPP.MSBuild": {
               "target": "Package",

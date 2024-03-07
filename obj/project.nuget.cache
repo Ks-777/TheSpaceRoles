@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "qcE8Ld5MT5SV6x0kFJPLw+MryX0hqcX2Obh6OWm5G9RAaGmYBfYTNiFXGYJt4y2rl/AHfPPuYWrjS3MvYbaF6Q==",
+  "dgSpecHash": "eRobcKWXbFH+YPmxVz6fl6fbH1v6IqAJC5gbPCdKHUHuS7IyIAEbat2XXh/YHnEPwJvhBzNpQm1mkO6VP+xHZg==",
   "success": true,
   "projectFilePath": "C:\\Users\\taiti\\Documents\\GitHub\\TheSpaceRoles\\TheSpaceRoles.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\taiti\\.nuget\\packages\\amongus.gamelibs.steam\\2023.11.28\\amongus.gamelibs.steam.2023.11.28.nupkg.sha512",
+    "C:\\Users\\taiti\\.nuget\\packages\\amongus.gamelibs.steam\\2024.3.5\\amongus.gamelibs.steam.2024.3.5.nupkg.sha512",
     "C:\\Users\\taiti\\.nuget\\packages\\asmresolver\\5.1.0\\asmresolver.5.1.0.nupkg.sha512",
     "C:\\Users\\taiti\\.nuget\\packages\\asmresolver.dotnet\\5.1.0\\asmresolver.dotnet.5.1.0.nupkg.sha512",
     "C:\\Users\\taiti\\.nuget\\packages\\asmresolver.pe\\5.1.0\\asmresolver.pe.5.1.0.nupkg.sha512",
