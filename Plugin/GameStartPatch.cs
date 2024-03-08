@@ -70,7 +70,7 @@ namespace TheSpaceRoles
         {
             List<byte> ImpIds = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Data.Role.TeamType == RoleTeamTypes.Impostor).Select(x => x.PlayerId).ToList();
             List<byte> CrewIds = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Data.Role.TeamType != RoleTeamTypes.Impostor).Select(x => x.PlayerId).ToList();
-            Logger.Info(string.Join("\n",PlayerControl.AllPlayerControls.ToArray().Select(x=>x.Data.Role.TeamType).ToArray() ));
+            Logger.Info(string.Join("\n", PlayerControl.AllPlayerControls.ToArray().Select(x => x.Data.Role.TeamType).ToArray()));
             Logger.Info($"imp:{ImpIds.Count}  c:{CrewIds.Count}");
 
             foreach ((Teams teams1, int count) in teams)
@@ -103,7 +103,8 @@ namespace TheSpaceRoles
                         }
                     }
                     else if
-                     (ImpIds.Count < count) { 
+                     (ImpIds.Count < count)
+                    {
 
                         for (int i = 0; i < ImpIds.Count - count; i++)
                         {
@@ -128,7 +129,7 @@ namespace TheSpaceRoles
                 SetTeam(pId, (int)Teams.Impostor);
 
             }
-            foreach (var database in DataBase.AllPlayerTeams)           
+            foreach (var database in DataBase.AllPlayerTeams)
             {
 
                 var writer = Rpc.SendRpc(Rpcs.SetTeam);

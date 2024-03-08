@@ -33,7 +33,7 @@ namespace TheSpaceRoles
 
         public static void Postfix(PingTracker __instance)
         {
-            __instance.text.text = __instance.text.text + $"\n<color=#5ccbff> {TSR.s_name} v{TSR.version}";
+            __instance.text.text += $"\n{TSR.c_name}";
         }
     }
 }

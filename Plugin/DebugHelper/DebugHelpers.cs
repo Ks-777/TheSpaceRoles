@@ -1,46 +1,201 @@
-﻿using HarmonyLib;
+﻿using AmongUs.GameOptions;
+using HarmonyLib;
+using Il2CppSystem;
+using InnerNet;
+using System;
+using System.Text.RegularExpressions;
+using TheSpaceRoles.Plugin;
 using UnityEngine;
+using static Il2CppSystem.Linq.Expressions.Interpreter.CastInstruction.CastInstructionNoT;
 
 namespace TheSpaceRoles
 {
-    [HarmonyPatch(typeof(ChatController), nameof(ChatController.Update))]
-    public class ChatPlus
+
+    [HarmonyPatch(typeof(ChatController), nameof(ChatController.SendChat))]
+    public static class ChatControllerPatch
     {
-        public static void Prefix(ChatController __instance)
+        public static bool Prefix(ChatController __instance)
         {
-            if (Input.GetKey(KeyCode.LeftControl))
+            if (__instance.timeSinceLastMessage > 3f)
             {
-                if (Input.GetKeyDown(KeyCode.C))
+                KeyCommands.chattexts.Add(__instance.freeChatField.textArea.text);
+                KeyCommands.undocount = KeyCommands.chattexts.Count;
+            }
+            return AddChat(__instance, __instance.freeChatField.textArea.text);
+        }
+        public static bool AddChat(ChatController __instance, string chat)
+        {
+            string[] chats = chat.Split(' ');
+            if (chat.StartsWith("/"))
+            {
+                string addchat = "";
+                string rpcaddchat = "";
+                switch (chats[0])
                 {
-                    GUIUtility.systemCopyBuffer = __instance.freeChatField.textArea.text;
+                    case "/help":
+                    case "/h":
+                    case "/?":
+                        string chatcommands =
+                            "チャットコマンド \n" +
+                            "/help,h,? : ヘルプを表示 \n" +
+                            "/help,h,? key,k: キーコマンドの表示 \n" +
+                            "/help,h,? chat,c : チャットコマンドの表示 \n " +
+                            "/chat,c {チャットしたい内容}" +
+                            "/co : カミングアウトする \n" +
+                            "/ver,v : バージョンを表示 \n" +
+                            "/name,n {新しい名前} \n" +
+                            "/gameend,ge : 廃村にする \n" +
+                            "/fakelevel,fl {level(uint)} : レベルを変える \n" +
+                            "/lobbytimer,lt [true/false] : ロビータイマーをつける";
+                        string keycommands =
+                            "キーコマンド \n" +
+                            "左右Shift + H : 廃村 \n" +
+                            "左右Shift + S : 会議スキップ \n" +
+                            " C : 試合スタートをキャンセル \n" +
+                            " V : 試合すぐに始める\n" +
+                            "Ctrl + C : コピー\n" +
+                            "Ctrl + X : カット\n" +
+                            "Ctrl + V : ペースト\n" +
+                            "Ctrl + Z , 上矢印キー : 元に戻す\n" +
+                            "Ctrl + Y , 下矢印キー : やり直し";
+                        if (chats.Length < 2)
+                        {
+                            chat += chatcommands + keycommands;
+                            break;
+                        }
+                        string text5;
+                        switch (chats[1])
+                        {
+                            case "chat":
+                            case "c":
+                                text5 = chatcommands;
+                                break;
+                            case "key":
+                            case "k":
+                                text5 = keycommands;
+                                break;
+                            default:
+                                text5 = chatcommands + keycommands;
+                                break;
+                        }
+                        if (1 == 0)
+                        {
+                        }
+                        chat += text5;
+                        break;
+                    case "/version":
+                    case "/ver":
+                    case "/v":
+                        addchat += "<color=#303030> </color>";
+                        break;
+                    case "/name":
+                    case "/n":
+                        string s;
+                        if (chats[0] == "/name")
+                        {
+                            s = chat.Substring(6);
+                        }
+                        else
+                        {
+                            s=chat.Substring(3);
+                        }
+                        s = s.Replace("\\n", "<br>");
+                        if (s.Length > 0)
+                        {
+                            PlayerControl.LocalPlayer.RpcSetName(s);
+                            Logger.Info("changed name : " + s, "", "Addedchat");
+                            addchat = addchat + "名前を " + s + "<\\color> に変更しました";
+                        }
+                        else
+                        {
+                            Logger.Info("couldn't change name : " + s, "", "Addedchat");
+                            addchat += "文字数は0字以上にしてください";
+                        }
+                        break;
+                    case "/namecolor":
+                    case "/nc":
+                        {
+                            string name = (PlayerControl.LocalPlayer).name;
+                            name = Regex.Replace(name, "<color[^>]*?>", string.Empty);
+                            name = Regex.Replace(name, "<\\color[^>]*?>", string.Empty);
+                            string color = chats[1];
+                            if(color.StartsWith("#")|| color.StartsWith("0x"))
+                            {
+                                color = "#" + color;
+                            }
+                            PlayerControl.LocalPlayer.RpcSetName("<color=" + chats[1] + ">" + name);
+                            break;
+                        }
+                    case "/gameend":
+                    case "/ge":
+                        if (((InnerNetClient)AmongUsClient.Instance).AmHost)
+                        {
+                            ((Behaviour)GameManager.Instance).enabled = false;
+                            GameManager.Instance.RpcEndGame((GameOverReason)3, false);
+                            GameManager.Instance.RpcEndGame((GameOverReason)8, false);
+                        }
+                        break;
+                    case "/skip":
+                    case "/s":
+                        if (((InnerNetClient)AmongUsClient.Instance).AmHost)
+                        {
+                            MeetingHud.Instance.RpcClose();
+                            Logger.Message("会議スキップ", "", "Addedchat");
+                        }
+                        break;
+                    case "/fl":
+                    case "/falelevel":
+                        if (chats[1] == "max")
+                        {
+                            PlayerControl.LocalPlayer.RpcSetLevel(4294967294u);
+                            addchat = "見かけのLevelを" + chats[1] + "にしました";
+                        }
+                        try
+                        {
+                            if (Regex.IsMatch(chats[1], "^[0-9]+$"))
+                            {
+                                PlayerControl.LocalPlayer.RpcSetLevel(uint.Parse(chats[1]) - 1);
+                                addchat = "見かけのLevelを" + chats[1] + "にしました";
+                            }
+                        }
+                        catch (System.Exception)
+                        {
+                            addchat = "その値は無効です";
+                        }
+                        break;
+                    case "/kc":
+                    case "/killcool":
+                        try
+                        {
+                            GameOptionsManager.Instance.CurrentGameOptions.SetFloat((FloatOptionNames)1, float.Parse(chats[1]));
+                            addchat +=  "killcool を " + chats[1] + "にしました";
+                        }
+                        catch
+                        {
+                            addchat+=  "killcoolを" + chats[1] + "にすることを失敗しました";
+                        }
+                        break;
+                    case "/lobbytimer":
+                    case "/lt":
+                        (addchat,TSR.LobbyTimer.Value) = Helper.ChatBool(chats, "LobbyTimer", TSR.LobbyTimer, ref addchat);
+                        break;
                 }
-                if (Input.GetKeyDown(KeyCode.V))
+                if (addchat != "")
                 {
-                    if (Input.GetKey(KeyCode.LeftShift))
-                    {
-                        AddChat(__instance, GUIUtility.systemCopyBuffer);
-                    }
-                    else
-                    {
-                        __instance.freeChatField.textArea.text = GUIUtility.systemCopyBuffer;
-
-                    }
+                    Helper.AddChat(addchat, __instance);
                 }
-
-
+                if (rpcaddchat != "")
+                {
+                    Helper.AllAddChat(addchat, __instance);
+                }
+                __instance.freeChatField.Clear();
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
-
-
-        public static void OtherPlayerAddChat(ChatController __instance, PlayerControl sourceplayer, string str)
-        {
-            __instance.AddChat(sourceplayer, str);
-        }
-        public static void AddChat(ChatController __instance, string str)
-        {
-            __instance.AddChat(PlayerControl.LocalPlayer, str);
-        }
-
     }
     [HarmonyPatch(typeof(HudManager), "Update")]
     public static class EnableChat

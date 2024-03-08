@@ -1,5 +1,4 @@
 ﻿using HarmonyLib;
-using InnerNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,17 +40,17 @@ namespace TheSpaceRoles
         {
 
 
-            
-                Logger.Info("hudmanager start");
-            if(DataBase.AllPlayerRoles.Any(x => x.Key == PlayerControl.LocalPlayer.PlayerId))
+            CustomButton.buttons.Clear();
+            Logger.Info("hudmanager start");
+            if (DataBase.AllPlayerRoles.Any(x => x.Key == PlayerControl.LocalPlayer.PlayerId))
             {
-                Logger.Info(DataBase.AllPlayerRoles.First(x => x.Key == PlayerControl.LocalPlayer.PlayerId).Value.Select(x=>x.Role).ToString());
+                Logger.Info(DataBase.AllPlayerRoles.First(x => x.Key == PlayerControl.LocalPlayer.PlayerId).Value.Select(x => x.Role).ToString());
 
                 DataBase.AllPlayerRoles.First(x => x.Key == PlayerControl.LocalPlayer.PlayerId).Value.Do(x => x.HudManagerStart(__instance));
             }
-                
 
-            
+
+
 
 
         }

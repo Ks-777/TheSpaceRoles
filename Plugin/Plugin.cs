@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
 
@@ -12,10 +13,13 @@ public class TSR : BasePlugin
     public const string Id = "supeshio.com.github";
     public const string name = "TheSpaceRoles";
     public const string s_name = "TSR";
+    public const string c_name = $"<color=#5ccbff> {TSR.s_name} v{TSR.version}";
+    public const string cs_name = $"<color=#5ccbff> {TSR.s_name} <size=80%>v{TSR.version}";
     public const string version = "1.0.0";
     internal static BepInEx.Logging.ManualLogSource Logger;
     public Harmony Harmony = new(Id);
 
+    public static ConfigEntry<bool> LobbyTimer { get; set; }
 
     public override void Load()
     {
@@ -23,6 +27,23 @@ public class TSR : BasePlugin
         Harmony.PatchAll();
         // Plugin startup logic
         TheSpaceRoles.Logger.Info($"Plugin {Id} is loaded!");
-
+        LobbyTimer = Config.Bind("Lobby", "LobbyTimer", false, "ロビータイマーを使うか");
     }
+
+    /*
+     後でやること
+    playerJoin時に部屋爆破までの時間を伝える。
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     */
 }
