@@ -31,6 +31,9 @@ namespace TheSpaceRoles
                         int t2 = reader.ReadInt32();
                         GameStarter.SetTeam(t1, t2);
                         break;
+                    case (byte)Rpcs.RpcMurderPlayer:
+                        RpcMurderPlayer.Murder(reader.ReadInt32(),reader.ReadInt32(),(DeathReason)reader.ReadInt32());
+                        break;
                 }
             }
         }
@@ -52,5 +55,12 @@ namespace TheSpaceRoles
         GameEnd,
         SendSetting,
         UseAbility,
+        RpcMurderPlayer,//A kill B : A/B/Reasons
+    }
+    public enum DeathReason : int
+    {
+        Disconnected,
+        ImpostorKill,
+        SheriffKill,
     }
 }

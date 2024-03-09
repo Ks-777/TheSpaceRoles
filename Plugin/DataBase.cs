@@ -14,7 +14,7 @@ namespace TheSpaceRoles
         /// playerId,Teams型で陣営型を入れれる
         /// </summary>
         public static Dictionary<int, Teams> AllPlayerTeams = [];//playerId,Teams
-
+        public static Dictionary<int, DeathReason> AllPlayerDeathReasons = [];
         public static PlayerControl[] AllPlayerControls()
         {
             return PlayerControl.AllPlayerControls.ToArray().Where(x => !x.isDummy).ToArray();

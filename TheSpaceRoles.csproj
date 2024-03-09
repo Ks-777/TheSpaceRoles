@@ -31,6 +31,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Plugin\Roles\CustomButton\" />
 	  <Folder Include="Resources\" />
 	</ItemGroup>
     <Target Name="Copy" AfterTargets="Build" Condition="'$(AmongUs)' != ''">

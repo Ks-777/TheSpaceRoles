@@ -32,7 +32,7 @@ namespace TheSpaceRoles
         }
 
     }
-    [HarmonyPatch(typeof(HudManager), nameof(HudManager.OnGameStart))]
+    [HarmonyPatch(typeof(HudManager), nameof(HudManager.Start))]
     public static class RoleMaster_GameStart
     {
 
@@ -43,14 +43,14 @@ namespace TheSpaceRoles
             
             DataBase.buttons.Clear();
             Logger.Info("hudmanager start");
-            if (DataBase.AllPlayerRoles.Any(x => x.Key == PlayerControl.LocalPlayer.PlayerId))
-            {
-                var k = DataBase.AllPlayerRoles.First(x => x.Key == PlayerControl.LocalPlayer.PlayerId).Value.Select(x => x.Role.ToString()).ToArray();
-                Logger.Info(string.Join(",",k));
+            //if (DataBase.AllPlayerRoles.Any(x => x.Key == PlayerControl.LocalPlayer.PlayerId))
+            //{
+            //    var k = DataBase.AllPlayerRoles[PlayerControl.LocalPlayer.PlayerId].Select(x => x.Role.ToString()).ToArray();
+            //    Logger.Info(string.Join(",",k));
 
-                DataBase.AllPlayerRoles.First(x => x.Key == PlayerControl.LocalPlayer.PlayerId).Value.Do(x => x.HudManagerStart(__instance));
-            }
-
+            //    DataBase.AllPlayerRoles[PlayerControl.LocalPlayer.PlayerId].Do(x => x.HudManagerStart(__instance));
+            //}
+            CustomButton.buttons.Do(x => { });
 
 
 

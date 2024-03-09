@@ -56,7 +56,7 @@ namespace TheSpaceRoles.Plugin.Roles
                     continue;
                 }
                 if (target == x.PlayerId) continue;
-                PlayerControl p = DataBase.AllPlayerControls().First(X => X.PlayerId == target);
+                PlayerControl p =Helper.GetPlayerControlFromId(target);
                 Vector2 vec = p.transform.position;
                 Vector2 vec2 = x.transform.position;
                 vec -= vec2;
@@ -70,7 +70,7 @@ namespace TheSpaceRoles.Plugin.Roles
             }
             if(targetdistance >= distance) 
             {
-                DataBase.AllPlayerControls().First(x=>x.PlayerId==id).cosmetics.currentBodySprite.BodySprite.material.SetFloat("_Outline", 1f);
+                Helper.GetPlayerControlFromId(id).cosmetics.currentBodySprite.BodySprite.material.SetFloat("_Outline", 1f);
                 return id;
 
                 

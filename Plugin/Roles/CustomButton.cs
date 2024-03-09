@@ -1,15 +1,24 @@
 ﻿using HarmonyLib;
+using Steamworks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace TheSpaceRoles
 {
 
     public class CustomButton:ActionButton
     {
-        
+        /// <summary>
+        /// 新役職作るとき入れるとこ
+        /// CustomButtonを入れる
+        /// </summary>
+        public static List<CustomButton> buttons = new() {};
+
+
+
         public static Vector2 SelectButtonPos(int c) => c switch
         {
             0 => new Vector2(0, 0),
@@ -78,6 +87,10 @@ namespace TheSpaceRoles
             actionButton.graphic.sprite = sprite;
             actionButton.transform.position.Set(pos.x, pos.y, -9);
             actionButton.cooldownTimerText.text = ((int)Timer).ToString();
+            PassiveButton passiveButton = actionButton.GetComponent<PassiveButton>();
+            passiveButton.enabled = true;
+
+            passiveButton.OnClick.AddListener((UnityEngine.Events.UnityAction)Click);
             SetActive(true);
             try
             {
@@ -92,7 +105,7 @@ namespace TheSpaceRoles
         public void HudUpdate()
         {
 
-            PlayerControl local = DataBase.AllPlayerControls().First(x=>x.PlayerId==PlayerControl.LocalPlayer.PlayerId);
+            PlayerControl local = PlayerControl.LocalPlayer;
             
             if(Timer >= 0)
             {
@@ -165,14 +178,19 @@ namespace TheSpaceRoles
 
                     if (CanUse() == -1) return;
                     OnClick();
+                    Timer = maxTimer;
                 }
             }
 
 
         }
+        public void MeetingEnds()
+        {
+            OnMeetingEnds();
+        }
     }
     [HarmonyPatch(typeof(HudManager),nameof(HudManager.Update))]
-    public static class hudUpdate
+    public static class HudUpdate
     {
         public static void Prefix(HudManager __instance)
         {

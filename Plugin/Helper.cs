@@ -1,5 +1,6 @@
 ﻿using BepInEx.Configuration;
 using System;
+using System.Linq;
 using UnityEngine;
 
 namespace TheSpaceRoles
@@ -107,6 +108,7 @@ namespace TheSpaceRoles
             AddChat = AddChat + text + "を" + config.Value + "にしました";
             return Tuple.Create(AddChat, config.Value);
         }
+        public static PlayerControl GetPlayerControlFromId(int id) => DataBase.AllPlayerControls().First(x => x.PlayerId == id);
     }
 
 }
