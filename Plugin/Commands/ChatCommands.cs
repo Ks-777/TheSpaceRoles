@@ -45,8 +45,8 @@ namespace TheSpaceRoles
                             "/ver,v : バージョンを表示 \n" +
                             "/name,n {新しい名前} \n" +
                             "/gameend,ge : 廃村にする \n" +
-                            "/fakelevel,fl {level(uint)} : レベルを変える \n" +
-                            "/lobbytimer,lt [true/false] : ロビータイマーをつける";
+                            "/fakelevel,fl {level(整数)} : レベルを変える \n" +
+                            "/lobbytimer,lt [true/false] : ロビータイマーをつける\n";
                         string keycommands =
                             "キーコマンド \n" +
                             "左右Shift + H : 廃村 \n" +
@@ -57,7 +57,7 @@ namespace TheSpaceRoles
                             "Ctrl + X : カット\n" +
                             "Ctrl + V : ペースト\n" +
                             "Ctrl + Z , 上矢印キー : 元に戻す\n" +
-                            "Ctrl + Y , 下矢印キー : やり直し";
+                            "Ctrl + Y , 下矢印キー : やり直し\n";
                         if (chats.Length < 2)
                         {
                             chat += chatcommands + keycommands;
@@ -148,19 +148,19 @@ namespace TheSpaceRoles
                         if (chats[1] == "max")
                         {
                             PlayerControl.LocalPlayer.RpcSetLevel(4294967294u);
-                            addchat = "見かけのLevelを" + chats[1] + "にしました";
+                            addchat = "見かけのLevelを" + chats[1] + "にしました。";
                         }
                         try
                         {
                             if (Regex.IsMatch(chats[1], "^[0-9]+$"))
                             {
                                 PlayerControl.LocalPlayer.RpcSetLevel(uint.Parse(chats[1]) - 1);
-                                addchat = "見かけのLevelを" + chats[1] + "にしました";
+                                addchat = "見かけのLevelを" + chats[1] + "にしました。";
                             }
                         }
                         catch (System.Exception)
                         {
-                            addchat = "その値は無効です";
+                            addchat = $"その値は無効です。{uint.MinValue}～{uint.MaxValue}の整数の範囲で指定してください。";
                         }
                         break;
                     case "/kc":
