@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using TheSpaceRoles.Plugin.Roles;
+using UnityEngine;
 using static TheSpaceRoles.Helper;
 
 namespace TheSpaceRoles
@@ -15,7 +17,24 @@ namespace TheSpaceRoles
         }
         public override void HudManagerStart(HudManager __instance)
         {
-            SheriffKillButton = new CustomButton(__instance, CustomButton.SelectButtonPos(4), KeyCode.Q, 30, null, new KillButton().graphic.sprite, null, null, "キル", false);
+            SheriffKillButton = new CustomButton(__instance, CustomButton.SelectButtonPos(4), KeyCode.Q, 30,
+                () => {
+                    var p = PlayerControlButtonControls.SetTarget(2.5f,Color);
+
+
+
+                    return p;
+                      
+
+
+
+                }
+
+
+
+
+
+            ,__instance.KillButton.graphic.sprite, ()=> { }, () => { }, "キル", false);
 
         }
     }

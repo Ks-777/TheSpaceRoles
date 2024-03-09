@@ -40,11 +40,13 @@ namespace TheSpaceRoles
         {
 
 
-            CustomButton.buttons.Clear();
+            
+            DataBase.buttons.Clear();
             Logger.Info("hudmanager start");
             if (DataBase.AllPlayerRoles.Any(x => x.Key == PlayerControl.LocalPlayer.PlayerId))
             {
-                Logger.Info(DataBase.AllPlayerRoles.First(x => x.Key == PlayerControl.LocalPlayer.PlayerId).Value.Select(x => x.Role).ToString());
+                var k = DataBase.AllPlayerRoles.First(x => x.Key == PlayerControl.LocalPlayer.PlayerId).Value.Select(x => x.Role.ToString()).ToArray();
+                Logger.Info(string.Join(",",k));
 
                 DataBase.AllPlayerRoles.First(x => x.Key == PlayerControl.LocalPlayer.PlayerId).Value.Do(x => x.HudManagerStart(__instance));
             }

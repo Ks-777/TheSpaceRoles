@@ -19,6 +19,11 @@ namespace TheSpaceRoles
         {
             return PlayerControl.AllPlayerControls.ToArray().Where(x => !x.isDummy).ToArray();
         }
+        /// <summary>
+        /// CustomButtonを入れておく
+        /// </summary>
+        public static List<CustomButton> buttons = new();
+
     }
 
 }
