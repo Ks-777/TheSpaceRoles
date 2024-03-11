@@ -15,15 +15,25 @@ namespace TheSpaceRoles
         /// </summary>
         public static Dictionary<int, Teams> AllPlayerTeams = [];//playerId,Teams
         public static Dictionary<int, DeathReason> AllPlayerDeathReasons = [];
+
+        public static List<CustomButton> buttons = [];
         public static PlayerControl[] AllPlayerControls()
         {
             return PlayerControl.AllPlayerControls.ToArray().Where(x => !x.isDummy).ToArray();
         }
         /// <summary>
-        /// CustomButtonを入れておく
+        /// RESET!!!!!!
         /// </summary>
-        public static List<CustomButton> buttons = new();
 
+
+        public static void Reset()
+        {
+
+            AllPlayerTeams.Clear();
+            AllPlayerRoles.Clear();
+            AllPlayerDeathReasons.Clear();
+            buttons.Clear();
+        }
     }
 
 }

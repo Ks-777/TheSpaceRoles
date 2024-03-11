@@ -32,32 +32,33 @@ namespace TheSpaceRoles
         }
 
     }
-    [HarmonyPatch(typeof(HudManager), nameof(HudManager.Start))]
-    public static class RoleMaster_GameStart
+    [HarmonyPatch(typeof(HudManager))]
+    public static class HudManagerGame
     {
-
-        public static void Postfix(HudManager __instance)
+        [HarmonyPatch(nameof(HudManager.OnGameStart)),HarmonyPostfix]
+        public static void ButtonCreate(HudManager __instance)
         {
-
-
-            
+            ButtonCooldownEnabled = false;
+            ButtonCooldown = 10f;
             DataBase.buttons.Clear();
             Logger.Info("hudmanager start");
-            //if (DataBase.AllPlayerRoles.Any(x => x.Key == PlayerControl.LocalPlayer.PlayerId))
-            //{
-            //    var k = DataBase.AllPlayerRoles[PlayerControl.LocalPlayer.PlayerId].Select(x => x.Role.ToString()).ToArray();
-            //    Logger.Info(string.Join(",",k));
+            if(DataBase.AllPlayerRoles.ContainsKey(PlayerControl.LocalPlayer.PlayerId))
+            {
+                var k = DataBase.AllPlayerRoles[PlayerControl.LocalPlayer.PlayerId].Select(x => x.Role.ToString()).ToArray();
+                Logger.Info(string.Join(",", k));
 
-            //    DataBase.AllPlayerRoles[PlayerControl.LocalPlayer.PlayerId].Do(x => x.HudManagerStart(__instance));
-            //}
-            CustomButton.buttons.Do(x => { });
-
-
+                DataBase.AllPlayerRoles[PlayerControl.LocalPlayer.PlayerId].Do(x => x.HudManagerStart(__instance));
+            }
+            
 
 
         }
-
+        public static float ButtonCooldown;
+        public static bool ButtonCooldownEnabled;
     }
+
+
+
     public static class RoleMasterLink
     {
 

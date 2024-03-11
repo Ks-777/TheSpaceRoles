@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using Il2CppSystem.CodeDom;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,14 @@ namespace TheSpaceRoles
     [HarmonyPatch(typeof(RoleManager), nameof(RoleManager.SelectRoles))]
     public static class GameStarter
     {
+        public static void Prefix()
+        {
+            AmongUsClient.Instance.FinishRpcImmediately(Rpc.SendRpc(Rpcs.DataBaseReset));
+            DataBase.Reset();
+        }
         public static void Postfix()
         {
             //Resetするべ
-            DataBase.AllPlayerTeams.Clear();
-            DataBase.AllPlayerRoles.Clear();
             //今回はC3 I1
             //Sheriff 1
             //です
@@ -158,5 +162,4 @@ namespace TheSpaceRoles
             //RoleMaster_GameStart.GameStart();
         }
     }
-
 }

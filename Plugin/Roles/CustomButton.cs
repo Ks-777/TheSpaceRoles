@@ -44,7 +44,7 @@ namespace TheSpaceRoles
         public float maxEffectTimer;
         public Func<int> CanUse;
         public string buttonText = "";
-
+        public bool atFirsttime;
 
         public Sprite sprite;
         public KeyCode keyCode;
@@ -52,6 +52,9 @@ namespace TheSpaceRoles
         public Action OnMeetingEnds;
         public Action OnEffectEnds;
         private static readonly int Desat = Shader.PropertyToID("_Desat");
+
+
+        public bool IsDead = false;
         public CustomButton(
             HudManager hudManager,
             Vector2 pos,
@@ -78,10 +81,10 @@ namespace TheSpaceRoles
             this.buttonText = buttonText;
             this.hasEffect = HasEffect;
             this.maxTimer = maxTimer;
-            Timer = 16.2f;
+            Timer = 10f;
             this.canEffectCancel = canEffectCancel;
             this.maxEffectTimer = EffectDuration;
-
+            this.atFirsttime = true;
             actionButton = Instantiate(hudManager.KillButton, hudManager.KillButton.transform.parent);
             actionButton.buttonLabelText.text = buttonText;
             actionButton.graphic.sprite = sprite;
@@ -104,6 +107,10 @@ namespace TheSpaceRoles
         }
         public void HudUpdate()
         {
+            if (Input.GetKeyDown(this.keyCode))
+            {
+                Click();
+            }
 
             PlayerControl local = PlayerControl.LocalPlayer;
             
@@ -121,6 +128,7 @@ namespace TheSpaceRoles
             }
             if(Timer <= 0) 
             {
+                atFirsttime = true;
                 Timer = 0;
                 if(hasEffect && isEffectActive) 
                 {
@@ -144,7 +152,17 @@ namespace TheSpaceRoles
                 actionButton.graphic.color = actionButton.buttonLabelText.color = Palette.DisabledClear;
                 actionButton.graphic.material.SetFloat(Desat, 1f);
             }
-            actionButton.SetCoolDown(Timer, (hasEffect && isEffectActive) ? maxEffectTimer : maxTimer);
+
+            if (atFirsttime == false)
+            {
+                actionButton.SetCoolDown(Timer, (hasEffect && isEffectActive) ? maxEffectTimer : maxTimer);
+
+            }
+            else
+            {
+                actionButton.SetCoolDown(Timer, 10f);
+
+            }
 
         }
         public void SetActive(bool isActive)
@@ -159,6 +177,11 @@ namespace TheSpaceRoles
                 actionButton.gameObject.SetActive(false);
                 actionButton.graphic.enabled = false;
             }
+        }
+        public void Death()
+        {
+            IsDead = true;
+            SetActive(false);
         }
         public void Click()
         {
@@ -184,8 +207,16 @@ namespace TheSpaceRoles
 
 
         }
+        public void MeetingStarts()
+        {
+            SetActive(false);
+        }
         public void MeetingEnds()
         {
+            //if()表示してもいいかどうかしらべなきゃいけない
+            if(IsDead) return;
+            SetActive(true);
+            atFirsttime = true;
             OnMeetingEnds();
         }
     }
@@ -194,6 +225,7 @@ namespace TheSpaceRoles
     {
         public static void Prefix(HudManager __instance)
         {
+            if(DataBase.buttons.Count == 0) return; 
             DataBase.buttons.Do(x=>x.HudUpdate());
         }
     }

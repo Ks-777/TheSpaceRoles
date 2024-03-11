@@ -18,7 +18,10 @@ namespace TheSpaceRoles
             }
             public static void Postfix(byte callId, MessageReader reader)
             {
-
+                if(callId >= 60)
+                {
+                    Logger.Info($"{(Rpcs)callId}");
+                }
                 switch (callId)
                 {
                     case (byte)Rpcs.SetRole:
@@ -33,6 +36,12 @@ namespace TheSpaceRoles
                         break;
                     case (byte)Rpcs.RpcMurderPlayer:
                         RpcMurderPlayer.Murder(reader.ReadInt32(),reader.ReadInt32(),(DeathReason)reader.ReadInt32());
+                        break;
+                    case (byte)Rpcs.DataBaseReset:
+                        DataBase.Reset();
+                        break;
+                    case (byte)Rpcs.SendRoomTimer:
+                        
                         break;
                 }
             }
@@ -51,7 +60,8 @@ namespace TheSpaceRoles
         SetRole = 80,
         SetTeam,
         ChangeRole,
-        GameStart,
+        DataBaseReset,
+        SendRoomTimer,
         GameEnd,
         SendSetting,
         UseAbility,
@@ -60,6 +70,7 @@ namespace TheSpaceRoles
     public enum DeathReason : int
     {
         Disconnected,
+        Suicide,
         ImpostorKill,
         SheriffKill,
     }
