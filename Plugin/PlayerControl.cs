@@ -15,24 +15,15 @@ namespace TheSpaceRoles
 
             foreach ((int i, RoleMaster[] rolemaster) in DataBase.AllPlayerRoles)
             {
-
                 var t = DataBase.AllPlayerControls().First(x => x.PlayerId == i).cosmetics.nameText.text;
                 Array.Sort(rolemaster);
 
-                DataBase.AllPlayerControls().First(x => x.PlayerId == i).cosmetics.nameText.text = t + $"\n <size=80%>{string.Join("×", rolemaster.Select(x => x.ColoredRoleName()))}";
+                if (i == PlayerControl.LocalPlayer.PlayerId)
+                {
+                    DataBase.AllPlayerControls().First(x => x.PlayerId == i).cosmetics.nameText.text = t + $"\n <size=80%>{string.Join("×", rolemaster.Select(x => x.ColoredRoleName()))}";
+
+                }
             }
-            PlayerControl p = PlayerControl.LocalPlayer.GetComponent<PlayerControl>();
-            p.RpcSetRole(RoleTypes.Impostor);
-
-            PlayerControl.AllPlayerControls.Add(p);
-
-        }
-    }
-    [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.FixedUpdate))]
-    public static class PlayerControlUpdatePatch
-    {
-        public static void Prefix(PlayerControl __instance)
-        {
 
         }
     }
