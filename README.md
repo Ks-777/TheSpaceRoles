@@ -7,21 +7,19 @@ and the content contained therein is not endorsed or otherwise sponsored by Inne
 ## EN:
 English is not supported (currently)  
 ## クレジット|credit
-- TheOtherRoles([https://github.com/TheOtherRolesAU/TheOtherRoles])
+- [TheOtherRoles]([https://github.com/TheOtherRolesAU/TheOtherRoles])<br>
   
   役職など多くの要素の参考元
   
   Thank you TheOtherRoles developers!
-- SuperNewRoles([https://github.com/SuperNewRoles/SuperNewRoles])
-  
+- [SuperNewRoles]([https://github.com/SuperNewRoles/SuperNewRoles])<br>
   機能などの参考元
-  
   よっキングさん&その他SNRデベロッパーの皆様ありがとうございます!
-- TownOfPlus[https://github.com/tugaru1975/TownOfPlus])
+- [TownOfPlus]([https://github.com/tugaru1975/TownOfPlus])<br>
   機能一部参考元
   
   tugaru1975さんありがとうございます!
-- Among-Us-Sheriff-Mod([https://github.com/Woodi-dev/Among-Us-Sheriff-Mod])
+- [Among-Us-Sheriff-Mod]([https://github.com/Woodi-dev/Among-Us-Sheriff-Mod])<br>
   
   Sheriff(シェリフ)の参考元
   
