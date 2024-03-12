@@ -10,12 +10,12 @@ English is not supported (currently)
 [The Other Roles](https://github.com/TheOtherRolesAU/TheOtherRoles)<br>
 役職など多くの要素の参考元
 Thank you TheOtherRoles developers!
-[Super New Roles]([https://github.com/SuperNewRoles/SuperNewRoles])
+[Super New Roles]([https://github.com/SuperNewRoles/SuperNewRoles])<br>
 機能などの参考元
 よっキングさん&その他SNRデベロッパーの皆様ありがとうございます!
-[Town Of Plus]([https://github.com/tugaru1975/TownOfPlus])
+[Town Of Plus]([https://github.com/tugaru1975/TownOfPlus])<br>
 機能一部参考元
 tugaru1975さんありがとうございます!
-[Among-Us-Sheriff-Mod]([https://github.com/Woodi-dev/Among-Us-Sheriff-Mod])
+[Among-Us-Sheriff-Mod]([https://github.com/Woodi-dev/Among-Us-Sheriff-Mod])<br>
 Sheriff(シェリフ)の参考元
 Thank you Among-Us-Sheriff-Mod developers!  
