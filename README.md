@@ -22,6 +22,7 @@ English is not supported (currently)
   
   tugaru1975さんありがとうございます!
 - Among-Us-Sheriff-Mod([https://github.com/Woodi-dev/Among-Us-Sheriff-Mod])
+- 
   Sheriff(シェリフ)の参考元
   
   Thank you Among-Us-Sheriff-Mod developers!  
