@@ -229,4 +229,31 @@ namespace TheSpaceRoles
             DataBase.buttons.Do(x=>x.HudUpdate());
         }
     }
+    [HarmonyPatch]
+    public static class MeetingHudPatch{
+
+        [HarmonyPatch(typeof(MeetingIntroAnimation))]
+        [HarmonyPatch(nameof(MeetingIntroAnimation.Start))]
+        public static void Prefix()
+        {
+
+            if (DataBase.buttons.Count == 0) return;
+            DataBase.buttons.Do(x => x.MeetingStarts());
+
+        }
+
+    }
+
+    [HarmonyPatch(typeof(ExileController), nameof(ExileController.WrapUp))]
+    public static class WrapUpPatch
+    {
+        public static void Prefix()
+        {
+
+            if (DataBase.buttons.Count == 0) return;
+            DataBase.buttons.Do(x => x.MeetingEnds());
+        }
+    }
+
+
 }

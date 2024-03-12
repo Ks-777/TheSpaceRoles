@@ -40,8 +40,6 @@ namespace TheSpaceRoles
                             "/help,h,? : ヘルプを表示 \n" +
                             "/help,h,? key,k: キーコマンドの表示 \n" +
                             "/help,h,? chat,c : チャットコマンドの表示 \n " +
-                            "/chat,c {チャットしたい内容}" +
-                            "/co : カミングアウトする \n" +
                             "/ver,v : バージョンを表示 \n" +
                             "/name,n {新しい名前} \n" +
                             "/gameend,ge : 廃村にする \n" +
@@ -58,30 +56,31 @@ namespace TheSpaceRoles
                             "Ctrl + V : ペースト\n" +
                             "Ctrl + Z , 上矢印キー : 元に戻す\n" +
                             "Ctrl + Y , 下矢印キー : やり直し\n";
-                        if (chats.Length < 2)
+                        if (chats.Length == 1)
                         {
-                            chat += chatcommands + keycommands;
+                            addchat += chatcommands + keycommands;
                             break;
                         }
-                        string text5;
-                        switch (chats[1])
+                        else
                         {
-                            case "chat":
-                            case "c":
-                                text5 = chatcommands;
-                                break;
-                            case "key":
-                            case "k":
-                                text5 = keycommands;
-                                break;
-                            default:
-                                text5 = chatcommands + keycommands;
-                                break;
+
+                            string commands_;
+                            switch (chats[1])
+                            {
+                                case "chat":
+                                case "c":
+                                    commands_ = chatcommands;
+                                    break;
+                                case "key":
+                                case "k":
+                                    commands_ = keycommands;
+                                    break;
+                                default:
+                                    commands_ = chatcommands + keycommands;
+                                    break;
+                            }
+                            addchat += commands_;
                         }
-                        if (1 == 0)
-                        {
-                        }
-                        chat += text5;
                         break;
                     case "/version":
                     case "/ver":

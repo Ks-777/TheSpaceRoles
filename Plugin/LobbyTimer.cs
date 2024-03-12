@@ -14,12 +14,14 @@ public class LobbyTimer
 	{
 		public static void Postfix(GameStartManager __instance)
 		{
-			if (AmongUsClient.Instance.AmHost&&AmongUsClient.Instance.IsGamePublic)
+			if (AmongUsClient.Instance.AmHost)
 			{
 				Timer_moving=true;
                 timer = 600f;
                 update = GameData.Instance.PlayerCount != __instance.LastPlayerCount;
                 tmpro = __instance.PlayerCounter;
+
+                playercounter = __instance.PlayerCounter.text;
             }
 
         }
@@ -30,32 +32,30 @@ public class LobbyTimer
 	{
 		public static void Prefix(GameStartManager __instance)
 		{
-            if (!Timer_moving || !AmongUsClient.Instance.IsGamePublic) return;
 
-            __instance.PlayerCounter.alignment = TextAlignmentOptions.Left;
 
             AmongUsClient instance = AmongUsClient.Instance;
-			
-			update = GameData.Instance.PlayerCount != __instance.LastPlayerCount;
-			
-		}
+
+            update = GameData.Instance.PlayerCount != __instance.LastPlayerCount;
+
+        }
 
 		public static void Postfix(GameStartManager __instance)
 		{
-			if (!Timer_moving) return;
-            if (!AmongUsClient.Instance.IsGamePublic) return;
 
             if (update)
 			{
 				playercounter = __instance.PlayerCounter.text;
 			}
-            __instance.PlayerCounter.autoSizeTextContainer = true;
+            //__instance.PlayerCounter.autoSizeTextContainer = true;
 
             timer = Mathf.Max(0f, timer -= Time.deltaTime);
+
+
 			AmongUsClient instance = AmongUsClient.Instance;
-			if (instance == null || instance.NetworkMode != 0)
+			if (instance != null && instance.NetworkMode != NetworkModes.LocalGame)
 			{
-				if (AmongUsClient.Instance.AmHost)
+				if (Timer_moving)
 				{
 
                     if (/*Ç†Ç∆Ç≈Ç±ÇÃ&&ëOÇ‹Ç≈çÌèú*/TSR.LobbyTimer.Value)
@@ -68,11 +68,10 @@ public class LobbyTimer
 						}
 						else
 						{
-							__instance.PlayerCounter.text = playercounter + "<color=#FF0000>" + text;
+							__instance.PlayerCounter.text =  playercounter + "<color=#FF0000>" + text;
 						}
 
 						
-                        __instance.PlayerCounter.autoSizeTextContainer = true;
 						__instance.PlayerCounter.enableWordWrapping = false; 
 					}
 					else
