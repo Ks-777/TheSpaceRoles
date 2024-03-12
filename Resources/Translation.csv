@@ -1,0 +1,16 @@
+key,,,,,,,,,,,,,,,,,
+lang.short,en,,pt-BR,pt,ko,ru,nl,fp,fr,de,it,ja,es,zh-CN,zh-TW,ga,ja2
+en_lang,English,Latam,Brazilian,Portuguese,Korean,Russian,Dutch,Filipino,French,German,Italian,Japanese,Spanish,Schinese,Tchinese,Irish,Japanese2
+,,,,,,,,,,,,,,,,,
+deathreason.disconnect,,,,,,,,,,,,切断,,,,,切断
+deathreason.votedout,,,,,,,,,,,,追放,,,,,処刑
+deathreason.impostorkill,,,,,,,,,,,,殺害,,,,,殺害
+deathreason.sheriffkill,,,,,,,,,,,,執行,,,,,執行
+deathreason.sheriffsuicide,,,,,,,,,,,,自爆,,,,,自爆
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,
+sheriff,Sheriff,,,,,,,,,,,シェリフ,,,,,執行官
+sheriff.intro,,,,,,,,,,,,,,,,,
+sheriff.sintro,,,,,,,,,,,,,,,,,

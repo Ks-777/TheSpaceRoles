@@ -11,7 +11,7 @@ namespace TheSpaceRoles
     {
         public static void Prefix(GameManager __instance)
         {
-            if (AmongUsClient.Instance.AmHost) PlayerControl.AllPlayerControls.ToArray().Do(x => x.RpcSetRole(RoleTypes.Crewmate));
+            if (AmongUsClient.Instance.AmHost) DataBase.AllPlayerControls().Do(x => x.RpcSetRole(RoleTypes.Crewmate));
 
             foreach ((int i, RoleMaster[] rolemaster) in DataBase.AllPlayerRoles)
             {

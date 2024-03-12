@@ -36,7 +36,7 @@ namespace TheSpaceRoles
         }
         public static void RpcMurder(PlayerControl source,PlayerControl target,DeathReason reason)
         {
-            if(reason==DeathReason.Suicide)
+            if(reason==DeathReason.SheriffSuicide)
             {
                 target.RpcMurderPlayer(target,true);
                 KillAnimationPatch.AnimCancel = true;

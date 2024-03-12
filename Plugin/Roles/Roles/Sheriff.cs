@@ -36,7 +36,7 @@ namespace TheSpaceRoles
                     }
                     else
                     {
-                        RpcMurderPlayer.RpcMurder(pc,PlayerControl.LocalPlayer,DeathReason.Suicide);
+                        RpcMurderPlayer.RpcMurder(pc,PlayerControl.LocalPlayer,DeathReason.SheriffSuicide);
                     }
 
                     AmongUsClient.Instance.FinishRpcImmediately(writer);

@@ -23,12 +23,12 @@ namespace TheSpaceRoles
         public bool CanUseBinoculars = true;
         public bool CanRepairSabotage = true;
         public bool HasTask = true;
-        public abstract void HudManagerStart(HudManager hudManager);
+        public virtual void HudManagerStart(HudManager hudManager) { }
         public virtual void Killed() { }
         public virtual void WasKilled() { }
         public string ColoredRoleName()
         {
-            return ColoredText(Color, Role.ToString());
+            return ColoredText(Color, Translation.GetString(Role.ToString()));
         }
 
     }
@@ -58,7 +58,9 @@ namespace TheSpaceRoles
     }
 
 
-
+    /// <summary>
+    /// Linkだよ!!
+    /// </summary>
     public static class RoleMasterLink
     {
 
@@ -68,9 +70,20 @@ namespace TheSpaceRoles
         };
 
 
+        public static List<RoleMaster> RolesMasterNormalLink = new() 
+        {
+            new Crewmate() 
+        };
+
         public static RoleMaster GetRoleMaster(Roles roles)
         {
             return RolesMasterLink.ToArray().First(x => x.Role == roles);
         }
+        public static RoleMaster GetRoleMasterNormal(Teams teams)
+        {
+            return RolesMasterNormalLink.ToArray().First(x => x.teamsSupported.Contains(teams));
+        }
+
+
     }
 }

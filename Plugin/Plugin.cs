@@ -24,6 +24,7 @@ public class TSR : BasePlugin
     public override void Load()
     {
         Logger = Log;
+        Translation.Load();
         Harmony.PatchAll();
         // Plugin startup logic
         TheSpaceRoles.Logger.Info($"Plugin {Id} is loaded!");

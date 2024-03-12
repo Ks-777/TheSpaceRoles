@@ -34,8 +34,7 @@ public class LobbyTimer
 		{
 
 
-            AmongUsClient instance = AmongUsClient.Instance;
-
+			if (AmongUsClient.Instance == null || GameData.Instance?.PlayerCount == null || __instance?.LastPlayerCount == null) return;
             update = GameData.Instance.PlayerCount != __instance.LastPlayerCount;
 
         }

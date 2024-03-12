@@ -51,6 +51,7 @@ namespace TheSpaceRoles
 
             MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(global::PlayerControl.LocalPlayer.NetId, (byte)rpc, SendOption.Reliable);
             return writer;
+            
         }
 
     }
@@ -70,8 +71,10 @@ namespace TheSpaceRoles
     public enum DeathReason : int
     {
         Disconnected,
-        Suicide,
+        VotedOut,
         ImpostorKill,
         SheriffKill,
+        SheriffSuicide,
     }
+    
 }

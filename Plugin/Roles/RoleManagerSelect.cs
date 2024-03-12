@@ -3,6 +3,7 @@ using Il2CppSystem.CodeDom;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using static TheSpaceRoles.Helper;
 
 namespace TheSpaceRoles
@@ -14,6 +15,16 @@ namespace TheSpaceRoles
         {
             AmongUsClient.Instance.FinishRpcImmediately(Rpc.SendRpc(Rpcs.DataBaseReset));
             DataBase.Reset();
+            foreach(int pid in DataBase.AllPlayerControls().Select(x=>x.PlayerId))
+            {
+                var name = DataBase.AllPlayerControls().First(x => x.PlayerId == pid).cosmetics.nameText.text;
+
+                name = Regex.Replace(name, "<color[^>]*?>", string.Empty);
+                name = Regex.Replace(name, "<\\color[^>]*?>", string.Empty);
+                DataBase.AllPlayerControls().First(x => x.PlayerId == pid).cosmetics.nameText.color = new();
+
+
+            }
         }
         public static void Postfix()
         {
@@ -27,10 +38,27 @@ namespace TheSpaceRoles
                 Dictionary<Teams, int> roles = new Dictionary<Teams, int>() { { Teams.Impostor, 1 } };
                 SendRpcSetTeam(roles);
                 SendRpcSetRole(Roles.Sheriff, DataBase.AllPlayerTeams.Where(x => new Sheriff().teamsSupported.Contains(x.Value)).Select(x => x.Key).ToArray());
+                RemainingPlayerSetRoles();
             }
 
 
             //いったんシェリフだけ自動的に一人に割り振ろうと思う
+        }
+        public static void RemainingPlayerSetRoles()
+        {
+            foreach( var item in DataBase.AllPlayerControls().Select(x => x.PlayerId))
+            {
+                if (DataBase.AllPlayerRoles.ContainsKey(item))
+                {
+
+                }
+                else
+                {
+                    DataBase.AllPlayerRoles.Add(item,[RoleMasterLink.GetRoleMasterNormal(DataBase.AllPlayerTeams[item])] );
+                }
+            }
+
+
         }
         public static void SendRpcSetRole(Roles roles, int[] players)
         {
@@ -53,7 +81,7 @@ namespace TheSpaceRoles
 
             //ここにどのroleIdがどのロールに対応するかを判定して
 
-            //var p = PlayerControl.AllPlayerControls.ToArray().First(x => x.PlayerId == playerId).PlayerId;
+            //var p = DataBase.AllPlayerControls().First(x => x.PlayerId == playerId).PlayerId;
             if (DataBase.AllPlayerRoles.ContainsKey(playerId))
             {
                 var list = DataBase.AllPlayerRoles[playerId];
@@ -72,9 +100,9 @@ namespace TheSpaceRoles
         }
         public static void SendRpcSetTeam(Dictionary<Teams, int> teams)
         {
-            List<byte> ImpIds = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Data.Role.TeamType == RoleTeamTypes.Impostor).Select(x => x.PlayerId).ToList();
-            List<byte> CrewIds = PlayerControl.AllPlayerControls.ToArray().Where(x => x.Data.Role.TeamType != RoleTeamTypes.Impostor).Select(x => x.PlayerId).ToList();
-            Logger.Info(string.Join("\n", PlayerControl.AllPlayerControls.ToArray().Select(x => x.Data.Role.TeamType).ToArray()));
+            List<byte> ImpIds = DataBase.AllPlayerControls().Where(x => x.Data.Role.TeamType == RoleTeamTypes.Impostor).Select(x => x.PlayerId).ToList();
+            List<byte> CrewIds = DataBase.AllPlayerControls().Where(x => x.Data.Role.TeamType != RoleTeamTypes.Impostor).Select(x => x.PlayerId).ToList();
+            Logger.Info(string.Join("\n", DataBase.AllPlayerControls().Select(x => x.Data.Role.TeamType).ToArray()));
             Logger.Info($"imp:{ImpIds.Count}  c:{CrewIds.Count}");
 
             foreach ((Teams teams1, int count) in teams)
@@ -151,7 +179,7 @@ namespace TheSpaceRoles
 
             //ここにどのroleIdがどのロールに対応するかを判定して
 
-            //var p = PlayerControl.AllPlayerControls.ToArray().First(x => x.PlayerId == playerId).PlayerId;
+            //var p = DataBase.AllPlayerControls().First(x => x.PlayerId == playerId).PlayerId;
             Logger.Info($"Player:{DataBase.AllPlayerControls().First(x => x.PlayerId == playerId).cosmetics.nameText.text}({playerId}) -> Team:{(Teams)teamId}");
 
             DataBase.AllPlayerTeams.Add(playerId, (Teams)teamId);

@@ -122,7 +122,9 @@ namespace TheSpaceRoles
                             {
                                 color = "#" + color;
                             }
-                            PlayerControl.LocalPlayer.RpcSetName("<color=" + chats[1] + ">" + name);
+                            var c = Helper.ColorFromColorcode(color);
+                            PlayerControl.LocalPlayer.cosmetics.nameText.color = c;
+                            
                             break;
                         }
                     case "/gameend":
