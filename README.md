@@ -17,5 +17,5 @@ Thank you TheOtherRoles developers!
 機能一部参考元  
 tugaru1975さんありがとうございます!  
 - Among-Us-Sheriff-Mod  
-(未実装)sheriff(シェリフ)の参考元  
+Sheriff(シェリフ)の参考元  
 Thank you Among-Us-Sheriff-Mod developers!  
