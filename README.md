@@ -2,8 +2,8 @@
 このmodはAmong Us又はInnersloth LLCとは無関係です。含まれるコンテンツはInnersloth LLCによって承認されてはいません。  
 このmodに含まれる一部の素材等はInnersloth LLCの所有物です。 © Innersloth LLC.  
 ## ほかの言語(README In Other Language)
-→[日本語](https://github.com/supeshioTheSpaceRoles/blob/main/README.md)<br>
- [English](https://github.com/supeshioTheSpaceRoles/blob/main/README-EN.md)<br>
+→[日本語](https://github.com/supeshio/TheSpaceRoles/blob/main/README.md)<br>
+ [English](https://github.com/supeshio/TheSpaceRoles/blob/main/README-EN.md)<br>
  
  ## リリース
  AmongUsのバージョン **2024.03.05**<br>
