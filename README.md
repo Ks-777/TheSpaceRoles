@@ -6,8 +6,8 @@
  [English](https://github.com/supeshioTheSpaceRoles/blob/main/README-EN.md)<br>
  
  ## リリース
- AmongUs Version **2024.03.05**
- **最新バージョン [Here](https://github.com/supeshio/TheSpaceRoles/releases/latest)**
+ AmongUs Version **2024.03.05**<br>
+ **最新バージョン [Here](https://github.com/supeshio/TheSpaceRoles/releases/latest)**<br>
 
 ## コマンド
 
