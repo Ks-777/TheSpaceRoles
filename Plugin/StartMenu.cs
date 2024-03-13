@@ -15,7 +15,7 @@ namespace TheSpaceRoles
         {
 
             TextMeshPro AddtionalText = new GameObject("text").AddComponent<TextMeshPro>();
-            AddtionalText.text = $"<color=#5ccbff> {TSR.s_name} v{TSR.version}";
+            AddtionalText.text = TSR.c_name;
             AddtionalText.fontSize = 2;
             AddtionalText.alignment = TextAlignmentOptions.Right;
             AddtionalText.enableWordWrapping = false;

@@ -1,4 +1,8 @@
-﻿namespace TheSpaceRoles
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+namespace TheSpaceRoles
 {
     /*all すべてのteam
 
@@ -15,6 +19,7 @@
     {
         //normal(これが当てはまることはおそらくないかと
         None = 0,
+        //default
         Crewmate,
         Impostor,
         Jackal,
@@ -64,4 +69,45 @@
         Thief//泥棒?
     }
 
+
+    /// <summary>
+    /// Linkだよ!!
+    /// </summary>
+    public static class RoleLink
+    {
+
+        public static List<RoleMaster> RolesMasterLink = new()
+        {
+            new Crewmate(),
+            new Impostor(),
+            new Sheriff(),
+        };
+
+
+        public static List<RoleMaster> RolesMasterNormalLink = new()
+        {
+            new Crewmate(),
+            new Impostor(),
+        };
+        public static Dictionary<Teams, Color> ColorFromTeams= new()
+        {
+            {Teams.Crewmate,Palette.CrewmateBlue},
+            {Teams.Impostor,Palette.ImpostorRed}
+        };
+
+
+        public static RoleMaster GetRoleMaster(Roles roles)
+        {
+            if (!RolesMasterLink.Any(x => x.Role == roles)) { Logger.Error($"{roles} is not contained in RoleMasterLink"); return null; }
+            return RolesMasterLink.First(x => x.Role == roles);
+        }
+        public static RoleMaster GetRoleMasterNormal(Teams teams)
+        {
+            if (!RolesMasterNormalLink.Any(x => x.teamsSupported.Contains(teams))) { Logger.Error($"{teams} is not contained in RoleMasterNoramlLink"); return null; }
+
+            return RolesMasterNormalLink.First(x => x.teamsSupported.Contains(teams));
+        }
+
+
+    }
 }

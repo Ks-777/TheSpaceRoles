@@ -28,7 +28,7 @@ namespace TheSpaceRoles
         public virtual void WasKilled() { }
         public string ColoredRoleName()
         {
-            return ColoredText(Color, Translation.GetString(Role.ToString()));
+            return ColoredText(Color, Translation.GetString("role."+Role.ToString() + ".name"));
         }
 
     }
@@ -58,32 +58,4 @@ namespace TheSpaceRoles
     }
 
 
-    /// <summary>
-    /// Linkだよ!!
-    /// </summary>
-    public static class RoleMasterLink
-    {
-
-        public static List<RoleMaster> RolesMasterLink = new()
-        {
-            { new Sheriff()}
-        };
-
-
-        public static List<RoleMaster> RolesMasterNormalLink = new() 
-        {
-            new Crewmate() 
-        };
-
-        public static RoleMaster GetRoleMaster(Roles roles)
-        {
-            return RolesMasterLink.ToArray().First(x => x.Role == roles);
-        }
-        public static RoleMaster GetRoleMasterNormal(Teams teams)
-        {
-            return RolesMasterNormalLink.ToArray().First(x => x.teamsSupported.Contains(teams));
-        }
-
-
-    }
 }

@@ -1,6 +1,6 @@
 ---
 name: 新役職|NewRole
-about: 新役職用|NewRole
+about: 今は提案しないでください|Don't propose it now.
 title: "【新役職|New Roles】<RoleName>"
 labels: 新役職|New Roles
 assignees: ''
