@@ -7,8 +7,8 @@ and the content contained therein is not endorsed or otherwise sponsored by Inne
 →[English](https://github.com/supeshioTheSpaceRoles/blob/main/README-EN.md)<br>
 
 ## Releases
-AmongUs Version **2024.03.05**
-**Latest Version [Here](https://github.com/supeshio/TheSpaceRoles/releases/latest)**
+AmongUs Version **2024.03.05**<br>
+**Latest Version [Here](https://github.com/supeshio/TheSpaceRoles/releases/latest)**<br>
 
 ## Command
 
