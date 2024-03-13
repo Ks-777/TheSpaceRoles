@@ -1,6 +1,6 @@
 ---
 name: バグ報告|BugReport
-about: バグ報告用|BugReport
+about: 今は報告しないでください|Do not report now.
 title: "【バグ|bug】ここにタイトル|title"
 labels: バグ|bug
 assignees: ''
