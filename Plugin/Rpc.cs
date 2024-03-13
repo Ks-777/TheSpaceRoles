@@ -1,5 +1,7 @@
 ﻿using HarmonyLib;
 using Hazel;
+using System.Linq;
+using UnityEngine.Networking.Types;
 
 namespace TheSpaceRoles
 {

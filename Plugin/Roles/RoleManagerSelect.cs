@@ -54,7 +54,15 @@ namespace TheSpaceRoles
                 }
                 else
                 {
-                    DataBase.AllPlayerRoles.Add(item,[RoleMasterLink.GetRoleMasterNormal(DataBase.AllPlayerTeams[item])] );
+
+                    var roles = RoleLink.GetRoleMasterNormal(DataBase.AllPlayerTeams[item]).Role;
+                    SetRole(item,(int)roles);
+
+                    //Rpc
+                    var writer = Rpc.SendRpc(Rpcs.SetRole);
+                    writer.Write((int)item);
+                    writer.Write((int)roles);
+                    AmongUsClient.Instance.FinishRpcImmediately(writer);
                 }
             }
 
@@ -79,22 +87,22 @@ namespace TheSpaceRoles
         public static void SetRole(int playerId, int roleId)
         {
 
-            //ここにどのroleIdがどのロールに対応するかを判定して
+            Logger.Info($"Player:{DataBase.AllPlayerControls().First(x => x.PlayerId == playerId).cosmetics.nameText.text}({playerId}) -> Role:{(Roles)roleId}");
 
-            //var p = DataBase.AllPlayerControls().First(x => x.PlayerId == playerId).PlayerId;
+
             if (DataBase.AllPlayerRoles.ContainsKey(playerId))
             {
+
                 var list = DataBase.AllPlayerRoles[playerId];
-                list.AddItem(RoleMasterLink.GetRoleMaster((Roles)roleId));
+                list.AddItem(RoleLink.GetRoleMaster((Roles)roleId));
                 DataBase.AllPlayerRoles[playerId] = list;
             }
             else
             {
 
-                DataBase.AllPlayerRoles.Add(playerId, [RoleMasterLink.GetRoleMaster((Roles)roleId)]);
+                DataBase.AllPlayerRoles.Add(playerId, [RoleLink.GetRoleMaster((Roles)roleId)]);
 
             }
-            Logger.Info($"Player:{DataBase.AllPlayerControls().First(x => x.PlayerId == playerId).cosmetics.nameText.text}({playerId}) -> Role:{(Roles)roleId}");
 
 
         }

@@ -18,7 +18,14 @@ namespace TheSpaceRoles
         public static void Postfix(IntroCutscene __instance)
         {
 
-            __instance.TeamTitle.text = "TeamTitle";
+
+            __instance.StartCoroutine(Effects.Lerp(0.1f, new Action<float>((p) =>
+            {
+
+                __instance.TeamTitle.color = RoleLink.ColorFromTeams[DataBase.AllPlayerTeams[PlayerControl.LocalPlayer.PlayerId]];
+                __instance.TeamTitle.text = Translation.GetString($"team.{DataBase.AllPlayerTeams[PlayerControl.LocalPlayer.PlayerId]}.name");
+
+            })));
         }
     }
     [HarmonyPatch(typeof(IntroCutscene), nameof(IntroCutscene.ShowRole))]
@@ -27,32 +34,19 @@ namespace TheSpaceRoles
         public static void Prefix(IntroCutscene __instance)
         {
 
-            __instance.RoleBlurbText.gameObject.SetActive(false);
         }
         public static void Postfix(IntroCutscene __instance)
         {
-            __instance.RoleBlurbText.color = DataBase.AllPlayerRoles[PlayerControl.LocalPlayer.PlayerId][0].Color;
-            __instance.RoleBlurbText.text = "RoleBlurbText";
-            __instance.RoleText.text = "RoleText";
-
-        }
-    }
-
-    public static class Tmpro
-    {
-        public static void text(IntroCutscene __instance,TextMeshPro tmp,string str) 
-        {
             __instance.StartCoroutine(Effects.Lerp(0.1f, new Action<float>((p) =>
             {
-                SetRoleTexts(__instance);
+
+                __instance.RoleBlurbText.color = DataBase.AllPlayerRoles[PlayerControl.LocalPlayer.PlayerId][0].Color;
+                __instance.RoleBlurbText.text = Translation.GetString($"role.{DataBase.AllPlayerRoles[PlayerControl.LocalPlayer.PlayerId][0].Role}.intro");
+                __instance.RoleText.color = DataBase.AllPlayerRoles[PlayerControl.LocalPlayer.PlayerId][0].Color;
+                __instance.RoleText.text = string.Join("×", DataBase.AllPlayerRoles[PlayerControl.LocalPlayer.PlayerId].Select(x => Translation.GetString($"role.{x.Role}.name")));
+                __instance.YouAreText.color = DataBase.AllPlayerRoles[PlayerControl.LocalPlayer.PlayerId][0].Color;
             })));
         }
-        public static void SetRoleTexts(IntroCutscene __instance)
-        {
 
-            __instance.RoleBlurbText.color = DataBase.AllPlayerRoles[PlayerControl.LocalPlayer.PlayerId][0].Color;
-            __instance.RoleBlurbText.text = "RoleBlurbText";
-            __instance.RoleText.text = "RoleText";
-        }
     }
 }

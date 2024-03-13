@@ -13,6 +13,7 @@ namespace TheSpaceRoles
             teamsSupported = [Teams.Impostor];
             Role = Roles.Impostor;
             Color = Palette.ImpostorRed;
+            HasKillButton = true;
         }
     }
 }

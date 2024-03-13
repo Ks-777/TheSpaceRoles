@@ -2,15 +2,29 @@ key,,,,,,,,,,,,,,,,,
 lang.short,en,,pt-BR,pt,ko,ru,nl,fp,fr,de,it,ja,es,zh-CN,zh-TW,ga,ja2
 en_lang,English,Latam,Brazilian,Portuguese,Korean,Russian,Dutch,Filipino,French,German,Italian,Japanese,Spanish,Schinese,Tchinese,Irish,Japanese2
 ,,,,,,,,,,,,,,,,,
-deathreason.disconnect,,,,,,,,,,,,切断,,,,,切断
-deathreason.votedout,,,,,,,,,,,,追放,,,,,処刑
-deathreason.impostorkill,,,,,,,,,,,,殺害,,,,,殺害
-deathreason.sheriffkill,,,,,,,,,,,,執行,,,,,執行
-deathreason.sheriffsuicide,,,,,,,,,,,,自爆,,,,,自爆
+deathreason.disconnect,Disconnected,,,,,,,,,,,切断,,,,,切断
+deathreason.votedout,Ejected,,,,,,,,,,,追放,,,,,処刑
+deathreason.impostorkill,"Killed By Impostor",,,,,,,,,,,殺害,,,,,殺害
+deathreason.sheriffkill,"Killed By Sheriff",,,,,,,,,,,射殺,,,,,射殺
+deathreason.sheriffsuicide,"Suicide By Sheriff",,,,,,,,,,,自爆,,,,,自爆
+,,,,,,,,,,,,,,,,,
+##Team,,,,,,,,,,,,,,,,,
+team.crewmate.name,Crewmate,,,,,,,,,,,クルー,,,,,村人陣営
+team.impostor.name,Impostor,,,,,,,,,,,インポスター,,,,,人狼陣営
 ,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,
+##Role,,,,,,,,,,,,,,,,,
+#crewmate,,,,,,,,,,,,,,,,,
+role.crewmate.name,Crewmate,,,,,,,,,,,クルーメイト,,,,,市民
+role.crewmate.intro,,,,,,,,,,,,タスクを行い、インポスターを追放しろ,,,,,仕事をこなし、人狼を処刑せよ
+role.crewmate.sintro,,,,,,,,,,,,タスクを行い、インポスターを追放しろ,,,,,仕事をこなし、人狼を処刑せよ
 ,,,,,,,,,,,,,,,,,
+#impostor,,,,,,,,,,,,,,,,,
+role.impostor.name,Impostor,,,,,,,,,,,インポスター,,,,,人狼
+role.impostor.intro,,,,,,,,,,,,クルーを全滅させろ,,,,,村を壊滅させろ
+role.impostor.sintro,,,,,,,,,,,,クルーを全滅させろ,,,,,村を壊滅させろ
 ,,,,,,,,,,,,,,,,,
-sheriff,Sheriff,,,,,,,,,,,シェリフ,,,,,執行官
-sheriff.intro,,,,,,,,,,,,,,,,,
-sheriff.sintro,,,,,,,,,,,,,,,,,
+#sheriff,,,,,,,,,,,,,,,,,
+role.sheriff.name,Sheriff,,,,,,,,,,,シェリフ,,,,,執行官
+role.sheriff.intro,,,,,,,,,,,,インポスターを撃ち抜け,,,,,人狼を射撃せよ
+role.sheriff.sintro,,,,,,,,,,,,インポスターを撃ち抜け,,,,,人狼を射撃せよ
