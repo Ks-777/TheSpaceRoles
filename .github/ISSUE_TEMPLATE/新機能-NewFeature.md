@@ -1,7 +1,7 @@
 ---
 name: 新機能提案|New Feature
 about: 今は提案しないでください|Don't propose it now.
-title: "【新機能|New Feature】<RoleName>"
+title: "【新機能|New Feature】<FeatureName>"
 labels: 新機能|New Feature
 assignees: ''
 
