@@ -27,4 +27,4 @@
   tugaru1975さんありがとうございます!<br>
 - [Among-Us-Sheriff-Mod](https://github.com/Woodi-dev/Among-Us-Sheriff-Mod)<br>
   シェリフの参考元<br>
-  Among-Us-Sheriff-Mod developersのディベロッパーの皆様ありがとうございます!<br>
+  Among-Us-Sheriff-Modのディベロッパーの皆様ありがとうございます!<br>
