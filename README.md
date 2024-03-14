@@ -9,9 +9,9 @@
  AmongUsのバージョン **2024.03.05**<br>
  **最新バージョン [Here](https://github.com/supeshio/TheSpaceRoles/releases/latest)**<br>
 
-## コマンド
+## [Mod機能(Wiki)](https://github.com/supeshio/TheSpaceRoles/wiki/MOD%E6%A9%9F%E8%83%BD)<br>
 
-## 役職
+## [役職(Wiki)](https://github.com/supeshio/TheSpaceRoles/wiki/%E5%BD%B9%E8%81%B7)<br>
 
 
 
