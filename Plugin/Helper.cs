@@ -1,6 +1,7 @@
 ﻿using BepInEx.Configuration;
 using System;
 using System.Linq;
+using System.Reflection.Metadata;
 using UnityEngine;
 
 namespace TheSpaceRoles
@@ -49,24 +50,24 @@ namespace TheSpaceRoles
             {
                 PlayerControl.LocalPlayer.RpcSetName(chpname);
             }
-            PlayerControl.LocalPlayer.RpcSendChat("\n<size=80%>" + Chat);
+            PlayerControl.LocalPlayer.RpcSendChat("\n<size=90%>" + Chat);
             PlayerControl.LocalPlayer.RpcSetName(name);
-            ((AbstractChatInputField)__instance.freeChatField).Clear();
+            __instance.freeChatField.Clear();
         }
 
         public static void AddChat(string Chat, ChatController __instance)
         {
             string name = (PlayerControl.LocalPlayer).name;
             PlayerControl.LocalPlayer.SetName($"<size=180%>{TSR.cs_name}", false);
-            __instance.AddChat(PlayerControl.LocalPlayer, "\n<size=80%>" + Chat, true);
+            __instance.AddChat(PlayerControl.LocalPlayer, "\n<size=90%>" + Chat, true);
             PlayerControl.LocalPlayer.SetName(name, false);
         }
 
-        public static Tuple<string,bool> ChatBool(string[] str, string text,  ConfigEntry<bool> config, ref string AddChat)
+        public static Tuple<string, bool> ChatBool(string[] str, string text, ConfigEntry<bool> config, ref string AddChat)
         {
             try
             {
-                if(str.Length > 1)
+                if (str.Length > 1)
                 {
                     if (str[1] == "true" || str[1] == "t")
                     {
@@ -109,6 +110,15 @@ namespace TheSpaceRoles
             return Tuple.Create(AddChat, config.Value);
         }
         public static PlayerControl GetPlayerControlFromId(int id) => DataBase.AllPlayerControls().First(x => x.PlayerId == id);
+
+
+        public static void SetPlayerScale(PlayerControl pc,float scale)
+        {
+            pc.transform.FindChild("BodyForms").localScale =Vector3.one * scale;
+            pc.transform.FindChild("Cosmetics").localScale = Vector3.one * scale *0.5f;
+
+
+        } 
     }
 
 }

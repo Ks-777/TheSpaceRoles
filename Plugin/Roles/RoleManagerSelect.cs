@@ -13,6 +13,7 @@ namespace TheSpaceRoles
     {
         public static void Prefix()
         {
+            HudManagerGame.IsGameStarting = false;
             AmongUsClient.Instance.FinishRpcImmediately(Rpc.SendRpc(Rpcs.DataBaseReset));
             DataBase.Reset();
             foreach(int pid in DataBase.AllPlayerControls().Select(x=>x.PlayerId))
@@ -39,6 +40,14 @@ namespace TheSpaceRoles
                 SendRpcSetTeam(roles);
                 SendRpcSetRole(Roles.Sheriff, DataBase.AllPlayerTeams.Where(x => new Sheriff().teamsSupported.Contains(x.Value)).Select(x => x.Key).ToArray());
                 RemainingPlayerSetRoles();
+                SendRpcSetRole(Roles.Mini, DataBase.AllPlayerTeams.Where(x => new Mini().teamsSupported.Contains(x.Value)).Select(x => x.Key).ToArray());
+
+                foreach (var item in DataBase.AllPlayerRoles)
+                {
+                    Logger.Info(item.Key+ " : "+string.Join(",",item.Value.Select(x=>x.Role)));
+                }
+
+
             }
 
 
@@ -55,7 +64,7 @@ namespace TheSpaceRoles
                 else
                 {
 
-                    var roles = RoleLink.GetRoleMasterNormal(DataBase.AllPlayerTeams[item]).Role;
+                    var roles = GetLink.GetCustomRoleNormal(DataBase.AllPlayerTeams[item]).Role;
                     SetRole(item,(int)roles);
 
                     //Rpc
@@ -92,15 +101,20 @@ namespace TheSpaceRoles
 
             if (DataBase.AllPlayerRoles.ContainsKey(playerId))
             {
-
-                var list = DataBase.AllPlayerRoles[playerId];
-                list.AddItem(RoleLink.GetRoleMaster((Roles)roleId));
-                DataBase.AllPlayerRoles[playerId] = list;
+                var list = DataBase.AllPlayerRoles[playerId].ToList();
+                var p = GetLink.GetCustomRole((Roles)roleId);
+                p.PlayerId = playerId;
+                p.PlayerName = DataBase.AllPlayerControls().First(x=>x.PlayerId==playerId).name.Replace("<color=.*>",string.Empty).Replace("</color>",string.Empty);
+                list.Add(p);
+                DataBase.AllPlayerRoles[playerId] =[..list];
             }
             else
             {
+                var p = GetLink.GetCustomRole((Roles)roleId);
+                p.PlayerId = playerId;
+                p.PlayerName = DataBase.AllPlayerControls().First(x => x.PlayerId == playerId).name.Replace("<color=.*>", string.Empty).Replace("</color>", string.Empty);
 
-                DataBase.AllPlayerRoles.Add(playerId, [RoleLink.GetRoleMaster((Roles)roleId)]);
+                DataBase.AllPlayerRoles.Add(playerId, [p]);
 
             }
 
@@ -195,7 +209,7 @@ namespace TheSpaceRoles
 
         public static void GameStartAndPrepare()
         {
-            //RoleMaster_GameStart.GameStart();
+            //CustomRole_GameStart.GameStart();
         }
     }
 }

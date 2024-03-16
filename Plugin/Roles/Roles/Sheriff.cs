@@ -1,4 +1,5 @@
 ﻿using Hazel;
+using Steamworks;
 using System.Linq;
 using TheSpaceRoles.Plugin.Roles;
 using UnityEngine;
@@ -6,11 +7,12 @@ using static TheSpaceRoles.Helper;
 
 namespace TheSpaceRoles
 {
-    public class Sheriff : RoleMaster
+    public class Sheriff : CustomRole
     {
         public static CustomButton SheriffKillButton;
         public Sheriff()
         {
+
             teamsSupported = [Teams.Crewmate];
             Role = Roles.Sheriff;
             Color = ColorFromColorcode("#ffd700");
@@ -18,15 +20,19 @@ namespace TheSpaceRoles
         }
         public override void HudManagerStart(HudManager __instance)
         {
+            if (DataBase.AllPlayerRoles.TryGetValue(PlayerControl.LocalPlayer.PlayerId, out var r))
+            {
+
+            }
             SheriffKillButton = new CustomButton(
                 __instance,
                 CustomButton.SelectButtonPos(0),
                 KeyCode.Q,
                 30,
-                () =>  PlayerControlButtonControls.SetTarget(2.5f, Color),
+                () => KillButtons.KillButtonSetTarget(2.5f, Color),
                 __instance.KillButton.graphic.sprite,
                 ()=> {
-                    var pc = GetPlayerControlFromId(PlayerControlButtonControls.SetTarget(2.5f, Color));
+                    var pc = GetPlayerControlFromId(KillButtons.KillButtonSetTarget(2.5f, Color));
                     MessageWriter writer = Rpc.SendRpc(Rpcs.RpcMurderPlayer);
                     if (DataBase.AllPlayerTeams[pc.PlayerId] != Teams.Crewmate)
                     {

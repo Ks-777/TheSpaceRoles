@@ -1,71 +1,63 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Il2CppInterop.Runtime;
-using Il2CppInterop.Runtime.InteropTypes;
-using Il2CppInterop.Runtime.InteropTypes.Arrays;
-using Il2CppSystem;
+using System.Threading.Tasks;
 using UnityEngine;
 using IntPtr = System.IntPtr;
 using Object = UnityEngine.Object;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 
 namespace TheSpaceRoles;
 
 public class Sprites
 {
 
-    public static Dictionary<string, Sprite> CachedSprites = new Dictionary<string, Sprite>();
+    public static Dictionary<string, Sprite> CachedSprites = new();
 
     public static Dictionary<string, Texture2D> CachedTexture = [];
 
 
     public static Sprite GetSprite(string path, float pixelsPerUnit = 115f)
     {
+        
         try
         {
-            if (CachedSprites.TryGetValue(path + pixelsPerUnit, out var value))
-            {
-                return value;
-            }
+            if (CachedSprites.TryGetValue(path + pixelsPerUnit, out var sprite)) return sprite;
+
             Texture2D val = LoadTextureFromResources(path);
-            value = Sprite.Create(val, new Rect(0f, 0f, val.width, (float)((Texture)val).height), new Vector2(0.5f, 0.5f), pixelsPerUnit);
-            Sprite obj = value;
-            obj.hideFlags = obj.hideFlags;
-            return CachedSprites[path + pixelsPerUnit] = value;
+            sprite = Sprite.Create(val, new Rect(0f, 0f, val.width, val.height), new Vector2(0.5f, 0.5f), pixelsPerUnit);
+            sprite.hideFlags |= HideFlags.HideAndDontSave | HideFlags.DontSaveInEditor;
+            return CachedSprites[path + pixelsPerUnit] = sprite;
         }
         catch (System.Exception ex)
         {
-            Logger.Message("Error can't load sprite path:" + path + "\nError : " + ex, "", "GetSprite");
+            Logger.Warning("Error can't load sprite path:" + path + "\nError : " + ex, "", "GetSprite");
         }
         return null;
     }
 
     public static Sprite GetSpriteFromResources(string path, float pixelsPerUnit = 115f)
     {
+        var a = CachedSprites.TryGetValue(path + pixelsPerUnit, out _);
         return GetSprite("TheSpaceRoles.Resources." + path, pixelsPerUnit);
     }
 
     public static Texture2D LoadTextureFromResources(string path)
     {
-        //IL_0021: Unknown result type (might be due to invalid IL or missing references)
-        //IL_0027: Expected O, but got Unknown
-        //IL_005e: Unknown result type (might be due to invalid IL or missing references)
-        //IL_0065: Unknown result type (might be due to invalid IL or missing references)
         try
         {
-            if (CachedTexture.TryGetValue(path, out var value))
-            {
-                return value;
-            }
-            value = new Texture2D(2, 2, (TextureFormat)5, true);
-            Assembly executingAssembly = Assembly.GetExecutingAssembly();
-            Stream manifestResourceStream = executingAssembly.GetManifestResourceStream(path);
-            byte[] array = new byte[manifestResourceStream.Length];
-            int num = manifestResourceStream.Read(array, 0, (int)manifestResourceStream.Length);
-            LoadImage(value, array, markNonReadable: false);
-            Texture2D obj = value;
-            return CachedTexture[path] = value;
+            if (CachedTexture.TryGetValue(path ,out var texture2D)) return texture2D;
+            Texture2D texture = new Texture2D(2, 2, TextureFormat.ARGB32, true);
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Stream stream = assembly.GetManifestResourceStream(path); 
+            var byteTexture = new byte[stream.Length];
+            var read = stream.Read(byteTexture, 0, (int)stream.Length);
+            LoadImage(texture, byteTexture, false);
+            texture.hideFlags |= HideFlags.HideAndDontSave | HideFlags.DontSaveInEditor;
+            return CachedTexture[path] = texture;
         }
         catch
         {
@@ -79,8 +71,7 @@ public class Sprites
 
     private static bool LoadImage(Texture2D tex, byte[] data, bool markNonReadable)
     {
-        if (iCall_LoadImage == null)
-            iCall_LoadImage = IL2CPP.ResolveICall<d_LoadImage>("UnityEngine.ImageConversion::LoadImage");
+        iCall_LoadImage ??= IL2CPP.ResolveICall<d_LoadImage>("UnityEngine.ImageConversion::LoadImage");
         var il2cppArray = (Il2CppStructArray<byte>)data;
         return iCall_LoadImage.Invoke(tex.Pointer, il2cppArray.Pointer, markNonReadable);
     }
@@ -105,17 +96,17 @@ public class Sprites
         }
         val.transform.localPosition = new Vector3(0f, 0f, -38f);
         SpriteRenderer val2 = val.AddComponent<SpriteRenderer>();
-        val2.sprite = GetSprite("ChatHelperPlus.Resources." + noResourcePath, pixelsPerUnit);
+        val2.sprite = GetSprite("TheSpaceRoles.Resources." + noResourcePath, pixelsPerUnit);
         val2.sortingLayerID = sortingLayerID;
-        ((Renderer)val2).sortingOrder = sortingOrder;
+        val2.sortingOrder = sortingOrder;
         return val;
     }
 
     public static GameObject GobjRender(GameObject @object, string noResourcePath, string name, float scale, float size = 1f, int layer = 5, int sortingLayerID = 50, int sortingOrder = 5, GameObject parent = null, bool active = true)
     {
         //IL_0093: Unknown result type (might be due to invalid IL or missing references)
-        Sprite sprite = GetSprite("ChatHelperPlus.Resources." + noResourcePath, scale);
-        Logger.Info("ChatHelperPlus.Resources." + noResourcePath + " : path" + (sprite.texture).ToString(), "", "GobjRender");
+        Sprite sprite = GetSprite("TheSpaceRoles.Resources." + noResourcePath, scale);
+        Logger.Info("TheSpaceRoles.Resources." + noResourcePath + " : path" + (sprite.texture).ToString(), "", "GobjRender");
         GameObject val = Object.Instantiate<GameObject>(@object);
         (val).name = name;
         if (val == null)
@@ -129,8 +120,8 @@ public class Sprites
         val.transform.position = new Vector3(0f, 0f, 0f);
         SpriteRenderer component = val.GetComponent<SpriteRenderer>();
         component.sprite = sprite;
-        ((Renderer)component).sortingLayerID = sortingLayerID;
-        ((Renderer)component).sortingOrder = sortingOrder;
+        component.sortingLayerID = sortingLayerID;
+        component.sortingOrder = sortingOrder;
         return val;
     }
 }

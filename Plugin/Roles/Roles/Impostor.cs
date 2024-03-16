@@ -6,10 +6,11 @@ using static TheSpaceRoles.Helper;
 
 namespace TheSpaceRoles
 {
-    public class Impostor : RoleMaster
+    public class Impostor : CustomRole
     {
         public Impostor()
         {
+
             teamsSupported = [Teams.Impostor];
             Role = Roles.Impostor;
             Color = Palette.ImpostorRed;

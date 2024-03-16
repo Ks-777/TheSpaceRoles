@@ -13,6 +13,8 @@ namespace TheSpaceRoles.Plugin
         public static void Prefix()
         {
             DataBase.buttons.Clear();
+            HudManagerGame.
+            IsGameStarting = false;
         }
     }
 }

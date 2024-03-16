@@ -20,7 +20,7 @@ namespace TheSpaceRoles.Plugin.Roles
         /// <param name="target">誰基準か</param>
         /// <param name="canBeTargetInVentPlayer">ベント内のプレイヤーを含むか</param>
         /// <returns>一番近いplayerのid  もし-1が帰ってきたらターゲットいないです</returns>
-        public static int SetTarget( float  targetdistance,Color color,Teams[] notIncludeTeamIds = null,byte[] notIncludeIds = null,int target = -1,bool canBeTargetInVentPlayer = false)
+        public static int SetTarget( float  targetdistance,Color color,Teams[] notIncludeTeamIds = null,int[] notIncludeIds = null,int target = -1,bool canBeTargetInVentPlayer = false)
         {
             DataBase.AllPlayerControls().Do(x => x.cosmetics.currentBodySprite.BodySprite.material.SetFloat("_Outline", 0f));
             DataBase.AllPlayerControls().Do(x => x.cosmetics.currentBodySprite.BodySprite.material.SetColor("_OutlineColor", color));
@@ -32,7 +32,7 @@ namespace TheSpaceRoles.Plugin.Roles
             }
             foreach (var x in PlayerControl.AllPlayerControls)
             {
-                if (notIncludeTeamIds != null && notIncludeIds.Length > 0)
+                if (notIncludeIds != null && notIncludeIds.Length > 0)
                 {
                     if (notIncludeIds.Contains(x.PlayerId))
                     {

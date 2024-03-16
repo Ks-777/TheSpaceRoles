@@ -111,13 +111,15 @@ public class LobbyTimer
 	{
 		public static void Postfix(AmongUsClient __instance, [HarmonyArgument(0)] ClientData data) 
 		{
-			Logger.Info($"{data.PlayerName} join the game. friendcode:{data.FriendCode}");
-			if (!AmongUsClient.Instance.IsGamePublic) return;
+			Logger.Info($"{data.PlayerName} join the game.");
+
+			if (AmongUsClient.Instance.NetworkMode == NetworkModes.LocalGame) return;
 			if (!AmongUsClient.Instance.AmHost) return;
             MessageWriter writer = Rpc.SendRpc(Rpcs.SendRoomTimer);
 			writer.Write(timer);
 			writer.Write(Time.time);
 			AmongUsClient.Instance.FinishRpcImmediately(writer);
+
 		}
 	}
     [HarmonyPatch(typeof(AmongUsClient), nameof(AmongUsClient.OnPlayerLeft))]
@@ -125,7 +127,7 @@ public class LobbyTimer
     {
         public static void Postfix(AmongUsClient __instance, [HarmonyArgument(0)] ClientData data)
         {
-            Logger.Info($"{data.Character.Data.PlayerName} left the game. friendcode:{data.FriendCode}");
+            Logger.Info($"{data.Character.Data.PlayerName} left the game.");
         }
     }
 }

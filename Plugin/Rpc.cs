@@ -24,26 +24,39 @@ namespace TheSpaceRoles
                 {
                     Logger.Info($"{(Rpcs)callId}");
                 }
-                switch (callId)
+                switch ((Rpcs)callId)
                 {
-                    case (byte)Rpcs.SetRole:
+                    case Rpcs.SetRole:
                         int r1 = reader.ReadInt32();
                         int r2 = reader.ReadInt32();
                         GameStarter.SetRole(r1, r2);
                         break;
-                    case (byte)Rpcs.SetTeam:
+                    case Rpcs.SetTeam:
                         int t1 = reader.ReadInt32();
                         int t2 = reader.ReadInt32();
                         GameStarter.SetTeam(t1, t2);
                         break;
-                    case (byte)Rpcs.RpcMurderPlayer:
+                    case Rpcs.RpcMurderPlayer:
                         RpcMurderPlayer.Murder(reader.ReadInt32(),reader.ReadInt32(),(DeathReason)reader.ReadInt32());
                         break;
-                    case (byte)Rpcs.DataBaseReset:
+                    case Rpcs.DataBaseReset:
                         DataBase.Reset();
                         break;
-                    case (byte)Rpcs.SendRoomTimer:
-                        
+                    case Rpcs.SendRoomTimer:
+                        LobbyTimer.GameStartManagerUpdatePatch.TimerSet(reader.ReadSingle(),reader.ReadSingle());
+                        break;
+                    case Rpcs.UseAbility:
+                        int useAbilityPlayerId = reader.ReadInt32();
+                        int useAbilityRoleId = reader.ReadInt32();
+                        int useAbilityId = reader.ReadInt32();
+                        switch ((Roles)useAbilityRoleId)
+                        {
+                            case Roles.Mini:
+                                Mini.SetAge(useAbilityPlayerId, reader.ReadInt32());
+                                break;
+                        }
+
+
                         break;
                 }
             }
@@ -54,6 +67,16 @@ namespace TheSpaceRoles
             MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(global::PlayerControl.LocalPlayer.NetId, (byte)rpc, SendOption.Reliable);
             return writer;
             
+        }
+        public static MessageWriter SendRpcUsebility(Rpcs rpc,Roles roleId,int playerId,int id)
+        {
+
+            MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(global::PlayerControl.LocalPlayer.NetId, (byte)rpc, SendOption.Reliable);
+            writer.Write(playerId);
+            writer.Write((int)roleId);
+            writer.Write(id);
+            return writer;
+
         }
 
     }

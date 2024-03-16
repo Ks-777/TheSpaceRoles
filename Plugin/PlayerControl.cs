@@ -12,23 +12,22 @@ namespace TheSpaceRoles
 {
 
     [HarmonyPatch(typeof(GameManager), nameof(GameManager.StartGame))]
-    public static class GameManegerStart
+    public static class GameManagerStart
     {
         public static void Prefix(GameManager __instance)
         {
             if (AmongUsClient.Instance.AmHost) DataBase.AllPlayerControls().Do(x => x.RpcSetRole(RoleTypes.Crewmate));
 
-            foreach ((int i, RoleMaster[] rolemaster) in DataBase.AllPlayerRoles)
+            foreach ((int i, CustomRole[] rolemaster) in DataBase.AllPlayerRoles)
             {
                 //var t = DataBase.AllPlayerControls().First(x => x.PlayerId == i).cosmetics.nameText.text;
-                Array.Sort(rolemaster);
 
                 if (i == PlayerControl.LocalPlayer.PlayerId)
                 {
 
                     //DataBase.AllPlayerControls().First(x => x.PlayerId == i).cosmetics.nameText.text = t + $"\n <size=80%>{string.Join("×", rolemaster.Select(x => x.ColoredRoleName()))}";
                     var d = DataBase.AllPlayerControls().First(x => x.PlayerId == i).cosmetics.nameText;
-                    GameObject gameObject = new GameObject("roletext");
+                    GameObject gameObject = new("roletext");
                     TextMeshPro RoleText = gameObject.AddComponent<TextMeshPro>();
                     RoleText.transform.parent = d.transform.parent;
                     RoleText.transform.localPosition = new Vector3(d.transform.localPosition.x, d.transform.localPosition.y-0.25f, d.transform.localPosition.z);
@@ -41,6 +40,9 @@ namespace TheSpaceRoles
                     RoleText.transform.localScale = Vector3.one;
                     RoleText.m_sharedMaterial = d.m_sharedMaterial;
                     RoleText.fontStyle = d.fontStyle;
+
+                    d.color = rolemaster[0].Color;
+
                 }
             }
 

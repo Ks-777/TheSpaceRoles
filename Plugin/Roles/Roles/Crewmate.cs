@@ -6,7 +6,7 @@ using static TheSpaceRoles.Helper;
 
 namespace TheSpaceRoles
 {
-    public class Crewmate : RoleMaster
+    public class Crewmate : CustomRole
     {
         public Crewmate()
         {
