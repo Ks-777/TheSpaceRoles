@@ -116,7 +116,7 @@ namespace TheSpaceRoles
         {
             pc.transform.FindChild("BodyForms").localScale =Vector3.one * scale;
             pc.transform.FindChild("Cosmetics").localScale = Vector3.one * scale *0.5f;
-
+            pc.GetComponent<CircleCollider2D>().radius = 0.2234f * scale; 
 
         } 
     }

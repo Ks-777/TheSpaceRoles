@@ -34,13 +34,17 @@ namespace TheSpaceRoles
         /// </summary>
 
 
-        public static void Reset()
+        public static void ResetAndPrepare()
         {
 
             AllPlayerTeams.Clear();
             AllPlayerRoles.Clear();
             AllPlayerDeathReasons.Clear();
             buttons.Clear();
+
+            HudManagerGame.IsGameStarting = false;
+
+            HudManagerGame.OnGameStarted = true;
         }
     }
 

@@ -8,14 +8,16 @@ using static TheSpaceRoles.Helper;
 
 namespace TheSpaceRoles
 {
-    [HarmonyPatch(typeof(RoleManager), nameof(RoleManager.SelectRoles))]
+    [HarmonyPatch]
     public static class GameStarter
     {
-        public static void Prefix()
+        [HarmonyPatch(typeof(RoleManager))]
+        [HarmonyPatch(nameof(RoleManager.SelectRoles)),HarmonyPrefix]
+        public static void Reset()
         {
-            HudManagerGame.IsGameStarting = false;
+
             AmongUsClient.Instance.FinishRpcImmediately(Rpc.SendRpc(Rpcs.DataBaseReset));
-            DataBase.Reset();
+            DataBase.ResetAndPrepare();
             foreach(int pid in DataBase.AllPlayerControls().Select(x=>x.PlayerId))
             {
                 var name = DataBase.AllPlayerControls().First(x => x.PlayerId == pid).cosmetics.nameText.text;
@@ -27,7 +29,10 @@ namespace TheSpaceRoles
 
             }
         }
-        public static void Postfix()
+        [HarmonyPatch(typeof(RoleManager))]
+        [HarmonyPatch(nameof(RoleManager.SelectRoles)),HarmonyPostfix]
+
+        public static void Select()
         {
             //Resetするべ
             //今回はC3 I1

@@ -34,16 +34,19 @@ namespace TheSpaceRoles
                 Logger.Info($"Death, reason:{reason}");
             }
         }
-        public static void RpcMurder(PlayerControl source,PlayerControl target,DeathReason reason)
+        public static void RpcMurder(PlayerControl source,PlayerControl target,DeathReason reason,bool DoCustomRpcMurder = true)
         {
-            if(reason==DeathReason.SheriffSuicide)
+            if(DoCustomRpcMurder)
             {
-                target.RpcMurderPlayer(target,true);
-                KillAnimationPatch.AnimCancel = true;
-            }
-            else
-            {
-                source.RpcMurderPlayer(target, true);
+                if (reason == DeathReason.SheriffSuicide)
+                {
+                    target.RpcMurderPlayer(target, true);
+                    KillAnimationPatch.AnimCancel = true;
+                }
+                else
+                {
+                    source.RpcMurderPlayer(target, true);
+                }
             }
             
             Murder(source.PlayerId,target.PlayerId,reason);

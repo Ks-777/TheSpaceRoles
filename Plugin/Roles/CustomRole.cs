@@ -40,12 +40,15 @@ namespace TheSpaceRoles
     [HarmonyPatch(typeof(HudManager))]
     public static class HudManagerGame
     {
+        public static bool OnGameStarted = false;
         public static bool IsGameStarting = false;
         [HarmonyPatch(nameof(HudManager.OnGameStart)),HarmonyPostfix]
         public static void ButtonCreate(HudManager __instance)
         {
-            if (IsGameStarting) return;
 
+            if (!OnGameStarted) return;
+            IsGameStarting = true;
+            OnGameStarted = false;
 
             ButtonCooldownEnabled = false;
             ButtonCooldown = 10f;

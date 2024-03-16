@@ -33,8 +33,9 @@ namespace TheSpaceRoles
         }
         public override void Update()
         {
-            if(age>=20)return;
+
             Timer -= Time.deltaTime;
+            if (age>=20)return;
             if(MaxTimer - Timer > (age+1) * MaxTimer/20)
             {
                 age += 1;
@@ -72,6 +73,7 @@ namespace TheSpaceRoles
             SetPlayerScale(player,0.4f+_age/20f * 0.6f);
             
             if (mini.age >= 20) DataBase.AllPlayerControls().First(x => x.PlayerId == playerId).cosmetics.nameText.text = $"{mini.PlayerName}";
+            Logger.Info($"{_age}");
         }
 
     }

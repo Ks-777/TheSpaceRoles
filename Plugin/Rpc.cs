@@ -40,7 +40,8 @@ namespace TheSpaceRoles
                         RpcMurderPlayer.Murder(reader.ReadInt32(),reader.ReadInt32(),(DeathReason)reader.ReadInt32());
                         break;
                     case Rpcs.DataBaseReset:
-                        DataBase.Reset();
+
+                        DataBase.ResetAndPrepare();
                         break;
                     case Rpcs.SendRoomTimer:
                         LobbyTimer.GameStartManagerUpdatePatch.TimerSet(reader.ReadSingle(),reader.ReadSingle());

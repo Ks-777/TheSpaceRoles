@@ -33,7 +33,7 @@ namespace TheSpaceRoles
                 __instance.KillButton.graphic.sprite,
                 ()=> {
                     var pc = GetPlayerControlFromId(KillButtons.KillButtonSetTarget(2.5f, Color));
-                    MessageWriter writer = Rpc.SendRpc(Rpcs.RpcMurderPlayer);
+                    
                     if (DataBase.AllPlayerTeams[pc.PlayerId] != Teams.Crewmate)
                     {
                         RpcMurderPlayer.RpcMurder(PlayerControl.LocalPlayer,pc,DeathReason.SheriffKill);
@@ -44,8 +44,6 @@ namespace TheSpaceRoles
                     {
                         RpcMurderPlayer.RpcMurder(pc,PlayerControl.LocalPlayer,DeathReason.SheriffSuicide);
                     }
-
-                    AmongUsClient.Instance.FinishRpcImmediately(writer);
                 },
                 () => SheriffKillButton.Timer = SheriffKillButton.maxTimer ,
                 "Kill",

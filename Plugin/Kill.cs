@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace TheSpaceRoles
 {
     [HarmonyPatch(typeof(KillAnimation), nameof(KillAnimation.CoPerformKill))]
-    class KillAnimationPatch
+    public class KillAnimationPatch
     {
         public static bool AnimCancel = false;
 
@@ -19,7 +19,7 @@ namespace TheSpaceRoles
             AnimCancel = false;
         }
     }
-
+    /*
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.Exiled))]
     public static class PCExiled
     {
@@ -32,5 +32,14 @@ namespace TheSpaceRoles
                 DataBase.buttons.Do(x => x.Death());
             }
         }
+    }*/
+    [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.MurderPlayer))]
+    public static class PlayerControlMurderPlayerPatch 
+    {
+        public static void Postfix(PlayerControl __instance, [HarmonyArgument(0)] PlayerControl target)
+        {
+            RpcMurderPlayer.RpcMurder(__instance, target,DeathReason.ImpostorKill,false);
+        }
     }
+
 }
