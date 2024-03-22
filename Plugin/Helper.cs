@@ -1,7 +1,9 @@
 ﻿using BepInEx.Configuration;
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 namespace TheSpaceRoles
@@ -118,7 +120,24 @@ namespace TheSpaceRoles
             pc.transform.FindChild("Cosmetics").localScale = Vector3.one * scale *0.5f;
             pc.GetComponent<CircleCollider2D>().radius = 0.2234f * scale; 
 
-        } 
+        }
+
+        public static T JsonSerializerByteClone<T>(T src)
+        {
+            ReadOnlySpan<byte> b = System.Text.Json.JsonSerializer.SerializeToUtf8Bytes<T>(src);
+            return System.Text.Json.JsonSerializer.Deserialize<T>(b);
+        }
+        public static T DeepCopy<T>(this T src)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(stream, src);
+                stream.Position = 0;
+
+                return (T)formatter.Deserialize(stream);
+            }
+        }
     }
 
 }

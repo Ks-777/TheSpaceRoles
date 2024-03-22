@@ -29,10 +29,6 @@
 		<PackageReference Include="BepInEx.IL2CPP.MSBuild" Version="2.1.0-rc.1" />
 		<PackageReference Include="Reactor" Version="2.2.0" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Resources\" />
-	</ItemGroup>
     <Target Name="Copy" AfterTargets="Build" Condition="'$(AmongUs)' != ''">
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(AmongUs)/BepInEx/plugins/" UseSymboliclinksIfPossible="true" />
 	</Target>

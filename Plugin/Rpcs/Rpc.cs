@@ -46,6 +46,9 @@ namespace TheSpaceRoles
                     case Rpcs.SendRoomTimer:
                         LobbyTimer.GameStartManagerUpdatePatch.TimerSet(reader.ReadSingle(),reader.ReadSingle());
                         break;
+                    case Rpcs.ShareOptions:
+                        CustomOption.GetOptionSelections(reader);
+                        break;
                     case Rpcs.UseAbility:
                         int useAbilityPlayerId = reader.ReadInt32();
                         int useAbilityRoleId = reader.ReadInt32();
@@ -57,8 +60,8 @@ namespace TheSpaceRoles
                                 break;
                         }
 
-
                         break;
+                        
                 }
             }
         }
@@ -90,7 +93,7 @@ namespace TheSpaceRoles
         DataBaseReset,
         SendRoomTimer,
         GameEnd,
-        SendSetting,
+        ShareOptions,
         UseAbility,
         RpcMurderPlayer,//A kill B : A/B/Reasons
     }
