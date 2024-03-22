@@ -1,4 +1,6 @@
 # The Space Rolesへようこそ!
+
+![TSRlogo](/Resources/TSRlogo.png)
 このmodはAmong Us又はInnersloth LLCとは無関係です。含まれるコンテンツはInnersloth LLCによって承認されてはいません。  
 このmodに含まれる一部の素材等はInnersloth LLCの所有物です。 © Innersloth LLC.  
 ## ほかの言語(README In Other Language)
